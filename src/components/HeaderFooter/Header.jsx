@@ -1,0 +1,126 @@
+import  Container  from './../../shared/Container'
+import logo from './../../assets/images/logo.png'
+import { Link } from 'react-router-dom'
+import { GoSearch } from "react-icons/go";
+import { TfiReload, TfiUser } from "react-icons/tfi";
+import { IoMdHeartEmpty } from "react-icons/io";
+import { BsCart2 } from "react-icons/bs";
+import { useState } from 'react';
+import { RxCross1, RxHamburgerMenu } from "react-icons/rx";
+import MobileMenu from './MobileMenu';
+const Header = () => {
+  const [isOpenMenu, setIsOpenMenu]= useState(false)
+  const menuItems=[
+    {
+      title: 'Home', 
+      link: '/'
+    },
+    {
+      title: "About Us",
+      link: '/about-us'
+    },
+    {
+      title: 'Shop',
+      link:'/shop'
+    },
+    {
+      title:'Blogs',
+      link:'/blogs'
+    },
+    {
+      title: 'Contact',
+      link: '/contact-us'
+    },
+    {
+      title: 'Order Track',
+      link:'/order-track'
+    }
+  ]
+  return (
+  <div className='!bg-white relative z-20  mx-auto '>
+    <div>
+    <div className=' max-w-[2520px] mx-auto xl:px-20 md:px-10 sm:px-2 px-4
+    flex relative bg-white z-20 top-0 left-0 justify-between  items-center py-5 xl:py-8'>
+      {/* Logo  */}
+      <div className='w-[120px] md:w-[150px] lg:w-[150px] xl:w-[200px]'>
+        <img className='w-full' src={logo} alt="Website Logo" />
+      </div>
+
+      {/* Website Menu and logos*/}
+      <div className='flex justify-between overflow-hidden bg-white '>
+
+        <div className='lg:flex justify-between items-center gap-10 hidden relative '>
+          {/* Menu Items */}
+          <div className=''>
+         <ul className='flex  gap-7 justify-center'>
+            {
+              menuItems.map((items, index)=><Link to={items.link} key={index}
+              className='lg:text-base xl:text-xl font-normal text-black hover:text-primary'
+              >
+                  {items.title}
+              </Link>)
+            }
+           </ul>
+         </div>
+
+         {/* User quick Icon */}
+           <div className='flex gap-4 justify-between items-center'>
+
+            {/* Search Icons */}
+           <div className='p-3 lg:p-3 xl:p-4 hover:bg-primary duration-300 transition-all group bg-neutral-200'>
+           <Link to='/'>
+            <GoSearch className='text-2xl lg:text-2xl xl:text-3xl group-hover:text-white duration-300 transition-all'/>
+            </Link>
+           </div>
+
+           {/* Compire Icons */}
+           <div className='p-3 lg:p-3 xl:p-4 hover:bg-primary duration-300 transition-all group bg-neutral-200'>
+           <Link to='/'>
+            <TfiReload className='text-2xl lg:text-2xl xl:text-3xl group-hover:text-white duration-300 transition-all'/>
+            </Link>
+           </div>
+
+           {/* Compire Icons */}
+           <div className='p-3 lg:p-3 xl:p-4 hover:bg-primary duration-300 transition-all group bg-neutral-200'>
+           <Link to='/'>
+            <IoMdHeartEmpty className='text-2xl lg:text-2xl xl:text-3xl group-hover:text-white duration-300 transition-all'/>
+            </Link>
+           </div>
+
+           {/* Compire Icons */}
+           <div className='p-3 lg:p-3 xl:p-4 hover:bg-primary duration-300 transition-all group bg-neutral-200'>
+           <Link to='/'>
+            <BsCart2 className='text-2xl lg:text-2xl xl:text-3xl group-hover:text-white duration-300 transition-all'/>
+            </Link>
+           </div>
+
+           {/* Compire Icons */}
+           <div className='p-3 lg:p-3 xl:p-4 hover:bg-primary duration-300 transition-all group bg-neutral-200'>
+           <Link to='/'>
+            <TfiUser className='text-2xl lg:text-2xl xl:text-3xl group-hover:text-white duration-300 transition-all'/>
+            </Link>
+           </div>
+
+           </div>
+        </div>  
+        </div>
+
+        <div className='md:flex-none md:block lg:hidden z-0'>
+          <button className='text-2xl md:text-3xl hover:bg-primary transition-all duration-300 hover:text-white bg-[#BAE6FD] p-2 rounded '
+          onClick={()=> setIsOpenMenu(!isOpenMenu)}>
+            {
+              isOpenMenu ? <RxCross1/> : <RxHamburgerMenu/>
+            }
+          </button>
+        </div>
+     
+    </div>
+    <div>
+    <MobileMenu isOpenMenu={isOpenMenu} menuItems={menuItems}/>
+    </div>
+  </div>
+  </div>
+  )
+}
+
+export default Header
