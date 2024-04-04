@@ -7,7 +7,7 @@
       "description": "Crafted from high-quality hardwood, this elegant dining table adds sophistication to your dining room. With its sleek design and sturdy construction, it's perfect for hosting family dinners and gatherings.",
       "reviews": 15,
       "price": 399.99,
-      "discount": 0,
+      "discount": 450,
       "featureImg": " https://i.ibb.co/QJK9yLs/frame-346091672748267.png",
       "images": ["dining_table.jpg", "dining_table2.jpg"]
     },
@@ -19,7 +19,7 @@
       "description": "Indulge in luxury with this plush velvet sofa set. Sink into its soft cushions and enjoy unparalleled comfort and style in your living room. With its modern design and premium upholstery, it's the centerpiece your home deserves.",
       "reviews": 12,
       "price": 899.99,
-      "discount": 0,
+      "discount": 1000,
       "featureImg": "https://i.ibb.co/WyVr4T1/frame-346111672748267.png",
       "images": ["sofa_set.jpg", "sofa_set2.jpg"]
     },
@@ -30,8 +30,8 @@
       "sku": "RSTWBDF001",
       "description": "Create a cozy retreat in your bedroom with this rustic wooden bed frame. Crafted from solid wood, it exudes warmth and charm. Its timeless design and sturdy construction ensure years of restful sleep.",
       "reviews": 10,
-      "price": 599.99,
-      "discount": 0,
+      "price": 750,
+      "discount": 800,
       "featureImg": "https://i.ibb.co/R4N69Fs/frame-346211672748268.png",
       "images": ["bed_frame.jpg", "bed_frame2.jpg"]
     },
