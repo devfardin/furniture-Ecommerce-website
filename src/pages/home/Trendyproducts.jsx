@@ -4,7 +4,7 @@ const Trendyproducts = () => {
     const [products, setProducts]=useState([])
     
     useEffect(()=>{
-        fetch('./products.json')
+        fetch('https://raw.githubusercontent.com/devfardin/furniture-Ecommerce-website/main/public/products.json')
         .then(res=>res.json())
         .then(data=>setProducts(data))
       },[])
