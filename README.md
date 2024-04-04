@@ -1,9 +1,22 @@
-# React + Vite
+# Furniture Ecommerce-website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+In today's fast-paced world, convenience is key. Farmart aims to simplify your grocery shopping experience by providing a one-stop solution for all your needs. Whether you're looking for fresh produce, pantry staples, or household essentials, Farmart has you covered
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-"# furniture-Ecommerce-website" 
+- **Product Catalog:** Browse through a wide range of products conveniently categorized for easy navigation.
+- **Add to Cart:** Add products to your cart with just a click, making it easy to keep track of your shopping list.
+- **Wishlist:** Save your favorite products for future reference by adding them to your wishlist.
+- **Product Details:** View detailed information about each product, including images, descriptions, and prices.
+- **Checkout:** Seamlessly proceed to checkout to complete your purchase securely.
+- **My Cart:** Manage your cart items, update quantities, and remove products as needed.
+- **User Authentication:** Securely sign up, log in, and manage your account using Firebase authentication.
+- **Database Management:** Utilize MongoDB for efficient data storage and retrieval, ensuring a smooth user experience.
+- **Responsive Design:** Enjoy a seamless shopping experience across devices with our responsive web design.
+
+## Technologies Used
+
+- **Frontend:** React.js, Next.js
+- **Backend:** Node.js, Express.js
+- **Database:** MongoDB
+- **Authentication:** Firebase
