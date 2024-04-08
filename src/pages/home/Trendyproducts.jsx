@@ -20,24 +20,28 @@ const Trendyproducts = () => {
                 <div className='grid grid-cols-4 gap-8'>
                     {
                         products.map((product, index) => <div key={index}
-                            className='overflow-hidden'>
+                            className='overflow-hidden group'>
                             {/* Product feature image */}
-                            <div className='relative overflow-hidden bg-[#D9D9D9]'>
+                            <div className='relative  overflow-hidden bg-[#D9D9D9]'>
                                 <img className='rounded-md hover:scale-125 hover:rotate-6 w-full transition-all duration-300'
                                     src={product.featureImg} alt="Feature image" />
-
-                                <ul className='flex items-center justify-between gap-6 px-6'>
-                                    <li className='p-4 bg-white hover:bg-primary'>
-                                        <BsCart3 className='text-3xl' />
+{/*  */}
+                                <ul  className='flex -mb-16 text-pera hover:text-pera z-0 group-hover:-translate-y-24 transition-all duration-500 group-hover:flex  items-center justify-between gap-x-2 px-7'>
+                                    <li className='p-4  group-scoped bg-white rounded-md group hover:bg-primary transition-all duration-300'>
+                                        <BsCart3 className='text-3xl hover-color text-pera 
+                                        transition-all duration-300' />
                                     </li>
-                                    <li className='p-4 bg-white hover:bg-primary'>
-                                        <IoHeartOutline className='text-3xl' />
+                                    <li className='p-4 group-scoped bg-white rounded-md group hover:bg-primary transition-all duration-300'>
+                                        <IoHeartOutline className='text-3xl hover-color text-pera 
+                                        transition-all duration-300' />
                                     </li>
-                                    <li className='p-2 bg-white hover:bg-primary'>
-                                        <AiOutlineRetweet />
+                                    <li className='p-4 group-scoped bg-white rounded-md group hover:bg-primary transition-all duration-300'>
+                                        <AiOutlineRetweet className='text-3xl hover-color text-pera 
+                                        transition-all duration-300'/>
                                     </li>
-                                    <li className='p-2 bg-white hover:bg-primary'>
-                                        <IoHeartOutline />
+                                    <li className='p-4 group-scoped bg-white rounded-md group hover:bg-primary transition-all duration-300'>
+                                        <IoHeartOutline className='text-3xl hover-color text-pera 
+                                        transition-all duration-300'/>
                                     </li>
                                 </ul>
                             </div>

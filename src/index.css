@@ -7,8 +7,9 @@ body{
    font-family: "Jost", sans-serif;
    font-optical-sizing: auto;
 }
-
-
+.group-scoped:hover .hover-color{
+   color: white;
+}
  
 
  
