@@ -8,8 +8,8 @@ import 'swiper/css/navigation';
 import { Navigation } from 'swiper/modules';
 
 import heroImage from '../../assets/images/heroslider.png'
-import Container from '../../shared/Container'
-import OutlineButton from '../../shared/OutlineButton';
+import Container from '../../components/shared/Container'
+import OutlineButton from '../../components/shared/OutlineButton';
 const HeroSlider = () => {
 
     const carousel = [
@@ -36,7 +36,7 @@ const HeroSlider = () => {
   return (
  <div className='bg-bg'>
      <Container>
-     <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
+     <Swiper navigation={true}  modules={[Navigation]} className="mySwiper">
       {
         carousel.map((items, index)=><SwiperSlide>
           <div className='py-20 px-10  md:px-20 lg:px-28 flex flex-col-reverse lg:flex-row gap-10 items-center justify-between '>

@@ -1,7 +1,7 @@
 import React from 'react'
 import feature_cagegory1 from '../../assets/images/feature_cagegory1.png'
 import feature_cagegory2 from '../../assets/images/feature_cagegory2.png'
-import Container from '../../shared/Container'
+import Container from '../../components/shared/Container'
 import { Link } from 'react-router-dom'
 
 const Featurecategory = () => {
