@@ -55,7 +55,7 @@ const Header = () => {
          <ul className='flex  gap-7 justify-center'>
             {
               menuItems.map((items, index)=><Link to={items.link} key={index}
-              className='lg:text-base xl:text-xl font-normal text-black hover:text-primary'
+              className='text-lg  font-normal text-black hover:text-primary'
               >
                   {items.title}
               </Link>)
@@ -64,40 +64,40 @@ const Header = () => {
          </div>
 
          {/* User quick Icon */}
-           <div className='flex gap-4 justify-between items-center'>
+           <div className='flex gap-3 justify-between items-center'>
 
             {/* Search Icons */}
-           <div className='p-3 lg:p-3 xl:p-4 hover:bg-primary duration-300 transition-all group bg-neutral-200'>
+           <div className='p-3.5  lg:p-4 hover:bg-primary duration-300 transition-all group bg-neutral-200'>
            <Link to='/'>
-            <GoSearch className='text-2xl lg:text-2xl xl:text-3xl group-hover:text-white duration-300 transition-all'/>
+            <GoSearch className='text-xl group-hover:text-white duration-300 transition-all'/>
             </Link>
            </div>
 
            {/* Compire Icons */}
-           <div className='p-3 lg:p-3 xl:p-4 hover:bg-primary duration-300 transition-all group bg-neutral-200'>
+           <div className='p-3.5 lg:p-4 hover:bg-primary duration-300 transition-all group bg-neutral-200'>
            <Link to='/'>
-            <TfiReload className='text-2xl lg:text-2xl xl:text-3xl group-hover:text-white duration-300 transition-all'/>
+            <TfiReload className='text-xl  group-hover:text-white duration-300 transition-all'/>
             </Link>
            </div>
 
            {/* Compire Icons */}
-           <div className='p-3 lg:p-3 xl:p-4 hover:bg-primary duration-300 transition-all group bg-neutral-200'>
+           <div className='p-3.5 lg:p-4 hover:bg-primary duration-300 transition-all group bg-neutral-200'>
            <Link to='/'>
-            <IoMdHeartEmpty className='text-2xl lg:text-2xl xl:text-3xl group-hover:text-white duration-300 transition-all'/>
+            <IoMdHeartEmpty className='text-xl  group-hover:text-white duration-300 transition-all'/>
             </Link>
            </div>
 
            {/* Compire Icons */}
-           <div className='p-3 lg:p-3 xl:p-4 hover:bg-primary duration-300 transition-all group bg-neutral-200'>
+           <div className='p-3.5 lg:p-4 hover:bg-primary duration-300 transition-all group bg-neutral-200'>
            <Link to='/'>
-            <BsCart2 className='text-2xl lg:text-2xl xl:text-3xl group-hover:text-white duration-300 transition-all'/>
+            <BsCart2 className='text-xl group-hover:text-white duration-300 transition-all'/>
             </Link>
            </div>
 
            {/* Compire Icons */}
-           <div className='p-3 lg:p-3 xl:p-4 hover:bg-primary duration-300 transition-all group bg-neutral-200'>
+           <div className='p-3.5 lg:p-4 hover:bg-primary duration-300 transition-all group bg-neutral-200'>
            <Link to='/'>
-            <TfiUser className='text-2xl lg:text-2xl xl:text-3xl group-hover:text-white duration-300 transition-all'/>
+            <TfiUser className='text-xl group-hover:text-white duration-300 transition-all'/>
             </Link>
            </div>
 
