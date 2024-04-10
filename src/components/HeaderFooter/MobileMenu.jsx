@@ -1,5 +1,4 @@
 import React from 'react'
-import { GoSearch } from 'react-icons/go'
 import { Link } from 'react-router-dom'
 
 const MobileMenu = ({ isOpenMenu, menuItems }) => {
@@ -10,7 +9,6 @@ const MobileMenu = ({ isOpenMenu, menuItems }) => {
           className={` w-full ${isOpenMenu ? 'top-20' : '-top-[410px]'} z-0 bg-bg
            absolute  transition-all left-0 duration-500 ease-in py-7 px-5 rounded `}
         >
-
           <ul className='flex flex-col gap-4 justify-center'>
             {
               menuItems.map((items, index) => <Link to={items.link} key={index}
