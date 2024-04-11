@@ -9,7 +9,6 @@ const OurStore = () => {
   const [categorys, setCategorys] = useState([])
   const [loading, setLoading] = useState(false)
   const [params, setParams] = useSearchParams()
-  const [products, setProducts]=useState([])
   const navigate = useNavigate()
   useEffect(() => {
     setLoading(true)
@@ -21,8 +20,8 @@ const OurStore = () => {
       })
   }, [])
 
-  const handleFilter=(item)=>{
-    const lable=item.replace(' ','-')
+  const handleFilter = (item) => {
+    const lable = item.replace(' ', '-')
     let currentQuery = {}
     if (params) {
       currentQuery = qs.parse(params.toString())
@@ -32,33 +31,35 @@ const OurStore = () => {
       url: '/',
       query: updatedQuery,
     })
-    navigate(url) 
+    navigate(url)
   }
   params.get('category')
+  const categoryValue = params.get('category')
+  const categoryName=categoryValue?.replace('-', ' ')
+  
 
   return (
     <div className='mt-16'>
-        <Container>
-            <SectionTitle title='Our Store' 
-            des='Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vitae vivamus morbi et ornare est Orci et sed commodo.'/>
-            <div>
-              {
-                loading ? <Loader/> :<div>
-                   <div className='flex justify-center items-center gap-6'>
-                  {
-                    categorys.map((category, index)=> <div  onClick={()=>handleFilter(category.category)}>
-                      <h1 className='text-base font-medium cursor-pointer text-heading hover:text-primary transition-all duration-300 border-b border-transparent hover:border-primary'>{category.category}</h1>
-                    </div>)
-                  }
-                </div>
-                <div className='mt-10'>
-                  <Products/>
-                </div>
-                </div>
-              }
-                  
+      <Container>
+        <SectionTitle title='Our Store'
+          des='Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vitae vivamus morbi et ornare est Orci et sed commodo.' />
+        <div>
+          {
+            loading ? <Loader /> : <div>
+              <div className='flex justify-center overflow-x-auto items-center gap-8'>
+                {
+                  categorys.map((category, index) => <div onClick={() => handleFilter(category.category)}>
+                    <h1 className={`text-base font-medium cursor-pointer text-heading hover:text-primary transition-all duration-300 border-b pb-3 hover:border-primary ${categoryName== category.category?'text-primary  border-b border-primary':'text-heading border-transparent'}`}>{category.category}</h1>
+                  </div>)
+                }
+              </div>
             </div>
-        </Container>
+          }
+        </div>
+      </Container>
+      <div className='mt-10'>
+        <Products />
+      </div>
     </div>
   )
 }

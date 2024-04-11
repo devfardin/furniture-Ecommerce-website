@@ -31,7 +31,7 @@ const Categorys = () => {
       })
   }, [])
   return (
-    <div className='mt-24'>
+    <div className='mt-16'>
       <Container>
         <Swiper
           slidesPerView={2}
@@ -83,5 +83,4 @@ const Categorys = () => {
     </div>
   )
 }
-
 export default Categorys

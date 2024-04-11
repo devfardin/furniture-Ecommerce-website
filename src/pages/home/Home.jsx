@@ -4,6 +4,8 @@ import SectionTitle from '../../components/SectionTitle'
 import Trendyproducts from './Trendyproducts'
 import Categorys from './Categorys'
 import OurStore from './Our-shop/OurStore'
+import AddBanner from './AddBanner'
+import ShopInfo from '../../components/shared/ShopInfo'
 const Home = () => {
   return (
     <div>
@@ -14,6 +16,8 @@ const Home = () => {
       <Trendyproducts />
       <Categorys/>
       <OurStore/>
+      <AddBanner/>
+      <ShopInfo/>
     </div>
   )
 }
