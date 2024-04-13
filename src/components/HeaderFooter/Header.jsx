@@ -70,6 +70,7 @@ const Header = () => {
            <div className='p-3.5  lg:p-4 hover:bg-primary duration-300 transition-all group bg-neutral-200'>
            <Link to='/'>
             <GoSearch className='text-xl group-hover:text-white duration-300 transition-all'/>
+            
             </Link>
            </div>
 
@@ -77,27 +78,31 @@ const Header = () => {
            <div className='p-3.5 lg:p-4 hover:bg-primary duration-300 transition-all group bg-neutral-200'>
            <Link to='/'>
             <TfiReload className='text-xl  group-hover:text-white duration-300 transition-all'/>
+            
             </Link>
            </div>
 
            {/* Compire Icons */}
-           <div className='p-3.5 lg:p-4 hover:bg-primary duration-300 transition-all group bg-neutral-200'>
+           <div className='p-3.5 relative lg:p-4 hover:bg-primary duration-300 transition-all group bg-neutral-200'>
            <Link to='/'>
             <IoMdHeartEmpty className='text-xl  group-hover:text-white duration-300 transition-all'/>
+            <span className="absolute -right-0 top-0.5 flex h-[20px] w-[20px] items-center justify-center rounded-full bg-primary text-center text-[11px] text-white ">0</span>
             </Link>
            </div>
 
            {/* Compire Icons */}
-           <div className='p-3.5 lg:p-4 hover:bg-primary duration-300 transition-all group bg-neutral-200'>
+           <div className='p-3.5 relative lg:p-4 hover:bg-primary duration-300 transition-all group bg-neutral-200'>
            <Link to='/'>
-            <BsCart2 className='text-xl group-hover:text-white duration-300 transition-all'/>
+            <BsCart2 className='text-xl !z-10 group-hover:text-white duration-300 transition-all'/>
+            <span className="absolute -right-0 top-0.5 flex h-[20px] w-[20px] items-center justify-center rounded-full bg-primary text-center text-[11px] text-white ">12</span>
             </Link>
            </div>
 
            {/* Compire Icons */}
-           <div className='p-3.5 lg:p-4 hover:bg-primary duration-300 transition-all group bg-neutral-200'>
+           <div className='p-3.5  lg:p-4 hover:bg-primary duration-300 transition-all group bg-neutral-200'>
            <Link to='/'>
             <TfiUser className='text-xl group-hover:text-white duration-300 transition-all'/>
+            
             </Link>
            </div>
 

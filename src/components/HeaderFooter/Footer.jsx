@@ -6,7 +6,6 @@ import { HiOutlineEnvelope } from "react-icons/hi2";
 import { IoHomeOutline } from "react-icons/io5";
 import { IoIosArrowForward } from "react-icons/io";
 import { Link } from 'react-router-dom';
-import OutlineButton from '../../components/shared/OutlineButton'
 const imporLink=[
   {
     name:'Home',
