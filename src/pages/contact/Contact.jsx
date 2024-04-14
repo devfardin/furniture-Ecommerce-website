@@ -8,8 +8,8 @@ const Contact = () => {
     <div>
       <PageHeader page='Contact Us'/>
       <Container>
-        <div className='grid grid-cols-1 md:grid-cols-4 lg:grid-cols-7 gap-16 mt-16 items-center justify-between'>
-          <div className='md:col-span-2'>
+        <div className='grid grid-cols-1 md:grid-cols-8 lg:grid-cols-8 gap-16 mt-16 items-top justify-between'>
+          <div className='md:col-span-3'>
           <ContactInfo/>
           </div>
           <div className='md:col-span-5'>

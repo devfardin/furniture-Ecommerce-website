@@ -41,7 +41,7 @@ const ContactInfo = () => {
                         </div>
                         <div>
                             <h1 className='text-xl font-medium text-heading'>{info.title}</h1>
-                            <h5 className='text-base font-normal text-neutral-400'>{info.text}</h5>
+                            <h5 className='text-base font-normal text-neutral-400 group-hover:text-primary duration-300 transition-all'>{info.text}</h5>
                         </div>
                 </div>)
             }
