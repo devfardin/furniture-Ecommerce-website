@@ -5,7 +5,8 @@ import { IoHeartOutline } from 'react-icons/io5'
 import { AiOutlineRetweet } from 'react-icons/ai'
 import { LiaEyeSolid } from 'react-icons/lia'
 
-const Products = () => {
+
+const Products = ({category, searchResult}) => {
     const [products, setProducts] = useState([])
     const [loading, setLoading]=useState(false)
     useEffect(() => {
@@ -17,6 +18,18 @@ const Products = () => {
                 setLoading(false)
             })
     }, [])
+
+    const productFilter=  products?.filter((items) => {
+        if(searchResult){
+            return searchResult === '' ? true :
+            (items.name && items.name.toLowerCase().includes(searchResult)) ;
+        }
+        else{
+            return category === '' ? true :
+            (items.category && items.category.includes(category))
+        } 
+    })
+    
   return (
     <div>
         <div>
@@ -24,7 +37,14 @@ const Products = () => {
                     loading ? <Loader/> :
                     <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-7'>
                     {
-                        products.map((product, index) => <div key={index}
+                        products?.filter((items) => {
+                            return searchResult === '' || 
+                            (
+                                (items.category && items.category.includes(category)) ||
+                                (items.name && items.name.toLowerCase().includes(searchResult)) 
+                            )
+                        })
+                        ?.map((product, index) => <div key={index}
                             className='overflow-hidden group'>
                             {/* Product feature image */}
                             <div className='relative  overflow-hidden bg-[#D9D9D9]'>

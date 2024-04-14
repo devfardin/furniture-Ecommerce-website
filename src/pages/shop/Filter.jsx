@@ -1,9 +1,32 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { RxCross1, RxHamburgerMenu } from 'react-icons/rx'
 import MobileFilter from './MobileFilter'
 import { LiaSearchSolid } from "react-icons/lia";
-const Filter = () => {
+const Filter = ({handelCategory, handleSearch}) => {
     const [menuOpen, setIsMenuOpen] = useState(false)
+    const [categorys, setCategorys] = useState([])
+    const [products, setProducts] = useState([])
+    const [loading, setLoading] = useState(false)
+    useEffect(() => {
+        setLoading(true)
+        fetch('./category.json')
+            .then((res) => res.json())
+            .then(data => {
+                setCategorys(data)
+                setLoading(false)
+            })
+    }, [])
+
+    useEffect(() => {
+        setLoading(true)
+        fetch('./products.json')
+            .then(res => res.json())
+            .then(data => {
+                setProducts(data)
+                setLoading(false)
+            })
+    }, [])
+
     return (
         <div>
             <div className='md:flex-none md:block lg:hidden z-0'>
@@ -17,16 +40,30 @@ const Filter = () => {
 
             <div className='border hidden lg:block border-[#dddddd] rounded-sm p-3'>
                 <h1 className='text-xl font-medium text-heading pb-1 border-b border-[#dddddd]'>Filter</h1>
-                <form className='mt-4 relative'>
-                    <input id='email' type='email' name='email' placeholder='Search Products'
+                <form onSubmit={handleSearch} className='mt-4 relative'>
+                    <input id='text' type='text' name='search' placeholder='Search Products'
                         className='py-2 px-4 w-full font-normal text-lg text-pera border border-[#dddddd] focus:border-primary rounded outline-none duration-300 transition-all' />
-                    <div className='p-3.5 rounded-r-md bg-primary absolute top-0 right-0'>
+                    <button type='submit' className='p-3.5 rounded-r-md bg-primary absolute top-0 right-0'>
                         <LiaSearchSolid className='text-white text-lg' />
-                    </div>
+                    </button>
                 </form>
                 <div>
                     <div className='mt-4'>
                         <h1 className='text-xl font-medium text-heading pb-1 border-b border-[#dddddd]'>Category</h1>
+                        <div className='mt-4'>
+                            {
+                                categorys.map((category, index) => <div key={index} onClick={()=>handelCategory(category.category)}>
+                                    <div className='flex items-center justify-between gap-5 group'>
+                                        <h2 className='text-base font-normal text-[#888888] mb-3 group-hover:text-primary duration-300 transition-all cursor-pointer group-hover:font-semibold'>{category.category}</h2>
+                                        <h3 className='text-base font-normal text-pera group-hover:text-primary duration-300 transition-all group-hover:font-semibold cursor-pointer'>
+                                            {
+                                                products.filter(product => product.category === category.category).length
+                                            } 
+                                        </h3>
+                                    </div>
+                                </div>)
+                            }
+                        </div>
 
                     </div>
                 </div>
