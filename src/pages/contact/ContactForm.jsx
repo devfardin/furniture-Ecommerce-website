@@ -1,4 +1,5 @@
 import React from 'react'
+import Button from '../../components/shared/Button'
 
 const ContactForm = () => {
     return (
@@ -27,6 +28,9 @@ const ContactForm = () => {
                     </label>
                     <textarea id='message' type='' name='message' placeholder='Your Message'
                         className='py-3 px-4 w-full h-32 font-normal text-lg text-pera border border-[#dddddd] focus:border-primary rounded outline-none duration-300 transition-all'> </textarea>
+                </div>
+                <div>
+                    <Button label='Send Message'/>
                 </div>
             </form>
         </div>

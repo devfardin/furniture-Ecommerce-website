@@ -6,6 +6,7 @@ import { HiOutlineEnvelope } from "react-icons/hi2";
 import { IoHomeOutline } from "react-icons/io5";
 import { IoIosArrowForward } from "react-icons/io";
 import { Link } from 'react-router-dom';
+import Button from '../shared/Button';
 const imporLink=[
   {
     name:'Home',
@@ -87,11 +88,10 @@ const Footer = () => (
 
             <input className='text-base font-normal text-primary p-4 rounded border border-neutral-100 bg-white outline-none w-full'
             type="email" placeholder='Enter Your Email' />
-            <input className='text-lg font-normal text-center text-white hover:text-primary bg-primary hover:bg-transparent border-2 border-transparent hover:border-2 hover:border-primary duration-300 transition-all py-3 px-4 w-full'
-            type="submit" value='Subscribe' />
+
+           <Button label='Subscribe' fullWidth={true}/> 
           </form>
         </div>
-
       </div>
     </Container>
   </div>
