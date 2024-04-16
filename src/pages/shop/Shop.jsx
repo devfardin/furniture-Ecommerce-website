@@ -11,8 +11,7 @@ const Shop = () => {
     return
   }
   const handleSearch = (e) => {
-    e.preventDefault()
-    setSearchResult(e.target.search.value.toLowerCase())
+    setSearchResult(e.target.value.toLowerCase())
   }
 
   return (
@@ -20,7 +19,7 @@ const Shop = () => {
       <PageHeader page='Shop' />
       <Container>
         <div className='mt-14 grid grid-cols-11 justify-between gap-10'>
-          <div className=' lg:col-span-3'>
+          <div className=' lg:col-span-3 '>
             <Filter handelCategory={handelCategory} handleSearch={handleSearch} />
           </div>
           <div className='col-span-9 lg:col-span-8'>
