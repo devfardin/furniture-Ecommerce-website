@@ -7,9 +7,11 @@ import { LiaEyeSolid } from 'react-icons/lia'
 
 
 const Products = ({ category, searchResult }) => {
+    
     const [products, setProducts] = useState([])
     const [loading, setLoading] = useState(false)
-  
+
+
     useEffect(() => {
         setLoading(true)
         fetch('./products.json')
@@ -21,7 +23,7 @@ const Products = ({ category, searchResult }) => {
     }, [])
 
   
-
+// console.log(searchResult.name);
 
 
     const productFilter = products?.filter((item) => {

@@ -7,6 +7,9 @@ import Shop from "../pages/shop/Shop.jsx";
 import Blogs from "../pages/blogs/Blogs.jsx";
 import Contact from "../pages/contact/Contact.jsx";
 import OrderTrack from "../pages/orderTrack/OrderTrack.jsx";
+import Login from "../pages/authentication/Login.jsx";
+import Register from "../pages/authentication/Register.jsx";
+import ForgotPassword from "../pages/authentication/ForgotPassword.jsx";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -36,6 +39,18 @@ const router = createBrowserRouter([
     {
       path: '/order-track',
       element: <OrderTrack/>
+    },
+    {
+      path: '/login',
+      element: <Login/>
+    },
+    {
+      path: '/register',
+      element: <Register/>
+    },
+    {
+      path: '/forgot-password',
+      element: <ForgotPassword/>
     }
     ]
   },
