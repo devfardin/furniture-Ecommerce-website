@@ -10,6 +10,7 @@ import OrderTrack from "../pages/orderTrack/OrderTrack.jsx";
 import Login from "../pages/authentication/Login.jsx";
 import Register from "../pages/authentication/Register.jsx";
 import ForgotPassword from "../pages/authentication/ForgotPassword.jsx";
+import ShopSingle from "../pages/SinglePage/ShopSingle.jsx";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -51,7 +52,11 @@ const router = createBrowserRouter([
     {
       path: '/forgot-password',
       element: <ForgotPassword/>
-    }
+    },
+    {
+      path: '/shop/single',
+      element: <ShopSingle/>
+    },
     ]
   },
 ]);

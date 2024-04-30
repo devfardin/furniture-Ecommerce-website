@@ -31,17 +31,6 @@ const Products = ({ category, searchResult }) => {
         const matchesSearch = searchResult === '' || item.name.toLowerCase().includes(searchResult);
         const matchesCategory = category === '' || item.category === category;
         return matchesSearch && matchesCategory;
-        
-       
-        
-        // if (searchResult) {
-        //     return (searchResult === '' ? true :
-        //         (items.name && items.name.toLowerCase().includes(searchResult)))
-        // }
-        // else {
-        //     return category === '' ? true :
-        //         (items.category && items.category.includes(category))
-        // }
     })
 
     return (
