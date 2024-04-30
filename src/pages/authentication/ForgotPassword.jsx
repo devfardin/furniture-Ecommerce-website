@@ -1,8 +1,23 @@
 import React from 'react'
+import PageHeader from '../../components/shared/PageHeader'
+import Container from '../../components/shared/Container'
+import Button from '../../components/shared/Button'
 
 const ForgotPassword = () => {
   return (
-    <div>ForgotPassword</div>
+    <div>
+      <PageHeader page='Forget Password'/>
+      <Container>
+        <div className='max-w-xl border border-[#e4e4e4] shadow p-10 mx-auto mt-10 '>
+        <h1 className='text-3xl font-medium text-heading mb-6 text-center'>Forget Password ?</h1>
+          <form className='mt-4 flex flex-col gap-3'>
+          <input  className='py-3 px-4 font-normal text-lg text-heading border rounded-sm border-[#e4e4e4] focus:border-primary outline-none duration-300 transition-all'
+          type="text" for='id' placeholder='Your Account E-mail'/> 
+          <Button label='Send Reset Mail' fullWidth={true}/>   
+        </form>
+        </div>
+      </Container>
+    </div>
   )
 }
 
