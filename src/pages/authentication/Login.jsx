@@ -18,21 +18,7 @@ const Login = () => {
                             className='border border-[#ced4da]  w-full px-3 py-3 focus:border-primary transition-all duration-300 rounded-sm outline-none text-lg font-normal'
                         />
                     </div>
-                    {/* User Email Address */}
-                    <div className='mt-5'>
-                        <label htmlFor="userName" className='flex items-center gap-3 text-base font-normal text-heading mb-2 pl-1'>Email Address<span className='text-red-500'>*</span></label>
-                        <input type="email" placeholder='Enter your Password' required
-                            className='border border-[#ced4da]  w-full px-3 py-3 focus:border-primary transition-all duration-300 rounded-sm outline-none text-lg font-normal'
-                        />
-                    </div>
-
-                    {/* User Phone Number */}
-                    <div className='mt-5'>
-                        <label htmlFor="userName" className='flex items-center gap-3 text-base font-normal text-heading mb-2 pl-1'>Phone Number<span className='text-red-500'>*</span></label>
-                        <input type="email" placeholder='Enter your Password' required
-                            className='border border-[#ced4da]  w-full px-3 py-3 focus:border-primary transition-all duration-300 rounded-sm outline-none text-lg font-normal'
-                        />
-                    </div>
+                   
 
                     <div className='mt-5'>
                         <label htmlFor="userName" className='flex items-center gap-3 text-base font-normal text-heading mb-2 pl-1'>Password<span className='text-red-500'>*</span></label>
