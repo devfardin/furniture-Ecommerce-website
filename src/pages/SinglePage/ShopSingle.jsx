@@ -77,6 +77,8 @@ const ShopSingle = () => {
                                 <span className='text-base font-normal text-[#198754]'>Glass Furniture</span>
                             </div>
                         </div>
+                        {/* Line divider */}
+                        <div className='border-b border-neutral-300 w-full mt-5'></div>
 
 
 
