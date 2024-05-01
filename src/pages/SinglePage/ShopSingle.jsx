@@ -5,6 +5,9 @@ import { FiMinus, FiPlus } from 'react-icons/fi'
 import { FaPlus } from 'react-icons/fa'
 import { IoHeartOutline } from 'react-icons/io5'
 import { AiOutlineRetweet } from 'react-icons/ai'
+import SingleUserInfo from '../../components/shared/SingleUserInfo'
+import { GoGift } from 'react-icons/go'
+import { TbTruckReturn } from 'react-icons/tb'
 const ShopSingle = () => {
     const [productQuantity, setProductQuantity] = useState(1)
     console.log(productQuantity);
@@ -78,8 +81,13 @@ const ShopSingle = () => {
                             </div>
                         </div>
                         {/* Line divider */}
-                        <div className='border-b border-neutral-300 w-full mt-5'></div>
+                        <div className='border-b border-neutral-300 w-full my-5'></div>
+                        {/* User Info */}
+                       <div className='mt-10 flex gap-6'>
+                       <SingleUserInfo Icon={GoGift} title='Free Shipping' subTitle='Order over 100$'/>
 
+                       <SingleUserInfo Icon={TbTruckReturn} title='7 Days Return' subTitle='Without any damage'/>
+                       </div>
 
 
                     </div>
