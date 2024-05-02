@@ -6,8 +6,8 @@ const MobileMenu = ({ isOpenMenu, menuItems }) => {
     <div>
       {
         <div
-          className={` w-full ${isOpenMenu ? 'top-20' : '-top-[410px]'} z-0 bg-bg
-           absolute  transition-all left-0 duration-500 ease-in py-7 px-5 rounded `}
+          className={` w-full ${isOpenMenu ? 'top-20' : '-top-[410px]'} z-10 bg-bg
+             transition-all left-0 duration-500 ease-in py-7 px-5  absolute`}
         >
           <ul className='flex flex-col gap-4 justify-center'>
             {

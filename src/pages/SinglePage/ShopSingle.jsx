@@ -8,6 +8,7 @@ import { AiOutlineRetweet } from 'react-icons/ai'
 import SingleUserInfo from '../../components/shared/SingleUserInfo'
 import { GoGift } from 'react-icons/go'
 import { TbTruckReturn } from 'react-icons/tb'
+import ProductDetailTab from './ProductDetailTab'
 const ShopSingle = () => {
     const [productQuantity, setProductQuantity] = useState(1)
     console.log(productQuantity);
@@ -91,6 +92,9 @@ const ShopSingle = () => {
 
 
                     </div>
+                </div>
+                <div className='mt-14'>
+                    <ProductDetailTab/>
                 </div>
             </Container>
         </div>
