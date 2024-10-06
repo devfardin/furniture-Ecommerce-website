@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body{
+   font-family: "Jost", sans-serif;
+   font-optical-sizing: auto;
+}
+.group-scoped:hover .hover-color{
+   color: white;
+}
+@layer base {
+   input[type="number"]::-webkit-inner-spin-button,
+   input[type="number"]::-webkit-outer-spin-button {
+     -webkit-appearance: none;
+     margin: 0;
+   }
+ }
+ 
+
+ 
+
+
