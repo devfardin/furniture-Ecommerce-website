@@ -1,12 +1,13 @@
 import React from 'react'
 import PageHeader from '../../components/shared/PageHeader'
 
-const Blogs = () => {
+const CompareProduct = () => {
   return (
     <div>
-      <PageHeader page='All Blogs'/>
+        <PageHeader page="Compare Product"/>
+      
     </div>
   )
 }
 
-export default Blogs
+export default CompareProduct

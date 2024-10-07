@@ -11,6 +11,8 @@ import Login from "../pages/authentication/Login.jsx";
 import Register from "../pages/authentication/Register.jsx";
 import ForgotPassword from "../pages/authentication/ForgotPassword.jsx";
 import ShopSingle from "../pages/SinglePage/ShopSingle.jsx";
+import CompareProduct from "../pages/compareProduct";
+import WishList from "../pages/wishlist";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -56,6 +58,14 @@ const router = createBrowserRouter([
     {
       path: '/shop/single',
       element: <ShopSingle/>
+    },
+    {
+      path: '/compare',
+      element: <CompareProduct/>
+    },
+    {
+      path: '/wishlist',
+      element: <WishList/>
     },
     ]
   },
