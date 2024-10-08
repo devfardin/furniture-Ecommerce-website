@@ -92,6 +92,7 @@ const OurTeam = () => {
                         modules={[Navigation, Autoplay]}
                        
                         navigation={{ nextEl: ".arrow-left", prevEl: ".arrow-right" }}
+                        
                         className="mySwiper">
                         {
                             team.map((item, index) => <SwiperSlide>

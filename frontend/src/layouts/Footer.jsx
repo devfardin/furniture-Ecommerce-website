@@ -1,12 +1,12 @@
-import React from 'react'
-import Container from '../../components/shared/Container'
-import logo from './../../assets/images/logo.png'
+import React from 'react';
+import Container from '../components/shared/Container';
+import logo from "./../assets/images/logo.png";
 import { LuPhone } from "react-icons/lu";
 import { HiOutlineEnvelope } from "react-icons/hi2";
 import { IoHomeOutline } from "react-icons/io5";
 import { IoIosArrowForward } from "react-icons/io";
 import { Link } from 'react-router-dom';
-import Button from '../shared/Button';
+import Button from '../components/shared/Button';
 const imporLink=[
   {
     name:'Home',

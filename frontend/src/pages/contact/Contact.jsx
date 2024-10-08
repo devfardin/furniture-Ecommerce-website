@@ -4,10 +4,15 @@ import Container from '../../components/shared/Container'
 import ContactInfo from './ContactInfo'
 import ContactForm from './ContactForm'
 import ShopInfo from '../../components/shared/ShopInfo'
+import {Helmet} from "react-helmet";
+
 const Contact = () => {
   return (
     <div>
       <PageHeader page='Contact Us' />
+      <Helmet>
+        <title> Furnito | Contact Us </title>
+      </Helmet>
       <Container>
         <div className='grid grid-cols-1 md:grid-cols-8 lg:grid-cols-8 gap-16 mt-16 items-top justify-between'>
           <div className='md:col-span-3'>

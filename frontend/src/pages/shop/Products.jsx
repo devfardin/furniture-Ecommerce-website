@@ -4,24 +4,27 @@ import { BsCart3 } from "react-icons/bs";
 import { IoHeartOutline } from "react-icons/io5";
 import { AiOutlineRetweet } from "react-icons/ai";
 import { LiaEyeSolid } from "react-icons/lia";
+import { useQuery } from "@tanstack/react-query";
+import axiosSecure from "../../hooks/useAxiosSecure";
 
 const Products = ({ category, searchResult }) => {
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    setLoading(true);
-    fetch("http://localhost:5000/products")
-      .then((res) => res.json())
-      .then((data) => {
-        setProducts(data);
-        setLoading(false);
-      });
-  }, []);
 
-  const productFilter = products?.filter((item) => {
-    const matchesSearch =
-      searchResult === "" || item.name.toLowerCase().includes(searchResult);
+  const { data, isLoading } = useQuery({
+    queryKey: ['products'],
+    queryFn: async() => {
+      const { data } = await axiosSecure.get('/products');
+      return data
+    }
+  })
+  console.log( data );
+  
+
+
+
+  const productFilter = data?.filter((item) => {
+    const matchesSearch = searchResult === "" || item.name.toLowerCase().includes(searchResult);
+    
     const matchesCategory = category === "" || item.category === category;
     return matchesSearch && matchesCategory;
   });
@@ -29,7 +32,7 @@ const Products = ({ category, searchResult }) => {
   return (
     <div>
       <div>
-        {loading ? (
+        { isLoading ? (
           <Loader />
         ) : (
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-7">

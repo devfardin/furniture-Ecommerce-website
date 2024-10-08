@@ -10,6 +10,7 @@ import { Navigation } from 'swiper/modules';
 import heroImage from '../../assets/images/heroslider.png'
 import Container from '../../components/shared/Container'
 import OutlineButton from '../../components/shared/OutlineButton';
+import LinkButton from '../../components/shared/LinkButton';
 const HeroSlider = () => {
 
     const carousel = [
@@ -43,7 +44,7 @@ const HeroSlider = () => {
           <div>
           <h1 className='text-4xl md:text-5xl lg:text-6xl cursor-pointer w-full lg:max-w-lg mb-5 lg:leading-[74px] font-semibold hover:text-primary text-heading'>{items.title}</h1>
             <p className='text-xl font-normal text-pera w-full lg:max-w-lg mb-10'>{items.description}</p>
-            <OutlineButton onclick={handleShowButton} lable='Shop Now'/>
+            <LinkButton fullWidth={false} label='Shop Now' link='/shop'/>
           </div>
           <div>
             <img src={items.image} alt="" />

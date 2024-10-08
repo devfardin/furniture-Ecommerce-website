@@ -6,12 +6,11 @@ import { IoMdHeartEmpty } from "react-icons/io";
 import { RxCross1, RxHamburgerMenu } from "react-icons/rx";
 import { TfiReload, TfiUser } from "react-icons/tfi";
 import { Link, NavLink } from "react-router-dom";
-import Container from "../shared/Container";
-import logo from "./../../assets/images/logo.png";
-import MobileMenu from "./MobileMenu";
-import Button from "../../components/shared/Button";
-import LinkButton from "../shared/LinkButton";
-import LinkButtonOut from "../shared/LinkButtonOut";
+import Container from "../components/shared/Container";
+import logo from "./../assets/images/logo.png";
+import MobileMenu from "../components/MobileMenu";
+import LinkButton from "../components/shared/LinkButton";
+import LinkButtonOut from "../components/shared/LinkButtonOut";
 const Header = () => {
   const [isOpenMenu, setIsOpenMenu] = useState(false);
   const click = () => alert("hello");

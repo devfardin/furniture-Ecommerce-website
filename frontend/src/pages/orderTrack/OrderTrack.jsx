@@ -2,9 +2,13 @@ import React from 'react'
 import PageHeader from '../../components/shared/PageHeader'
 import Container from '../../components/shared/Container'
 import Button from '../../components/shared/Button'
+import { Helmet } from 'react-helmet'
 const OrderTrack = () => {
   return (
     <div>
+      <Helmet>
+        <title>Furnito | Order Tracking </title>
+      </Helmet>
       <PageHeader page='Order Tracking'/>
       <Container>
         <div className='max-w-xl shadow p-10 mx-auto mt-10 lg:mt-16'>

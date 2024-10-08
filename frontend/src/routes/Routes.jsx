@@ -1,4 +1,3 @@
-import NotFound from "../components/HeaderFooter/ErrorPage/NotFound";
 import Home from "../pages/home/Home";
 import { createBrowserRouter } from "react-router-dom";
 import Main from '../layouts/Main.jsx';
@@ -13,11 +12,11 @@ import ForgotPassword from "../pages/authentication/ForgotPassword.jsx";
 import ShopSingle from "../pages/SinglePage/ShopSingle.jsx";
 import CompareProduct from "../pages/compareProduct";
 import WishList from "../pages/wishlist";
+import NotFound from "../pages/notFound/NotFound";
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Main />,
-    errorElement: <NotFound />,
     children: [
       {
         path: '/',
@@ -66,6 +65,10 @@ const router = createBrowserRouter([
     {
       path: '/wishlist',
       element: <WishList/>
+    },
+    {
+      path: '*',
+      element: <NotFound/>
     },
     ]
   },
