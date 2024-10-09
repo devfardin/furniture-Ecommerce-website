@@ -1,6 +1,6 @@
 import { Tab } from '@headlessui/react'
 import Description from './Description'
-const ProductDetailTab = () => {
+const ProductDetailTab = ({data}) => {
     function classNames(...classes) {
         return classes.filter(Boolean).join(' ')
     }
@@ -24,10 +24,7 @@ const ProductDetailTab = () => {
             <div className='border-b border-neutral-200 w-full my-5'></div>
             <Tab.Panels>
                 <Tab.Panel>
-                    <Description text='Rich, warm and inviting are a few words that describe this square shaker-style dining table. With slightly tapered legs, the classic design combines a look that will go well with many decors and is an ideal size for a kitchen eating area or small dining room
-                    Overall table size is a squared 29.5" x 29"H. Floor clearance of 26.3".
-                    Complete your table with ladder back chairs for full dining experience.
-                    Made with solid wood in light oak finish. Assembly required. Perfect in the kitchen that allows you to create a breakfast area'/>
+                    <Description text={data?.description}/>
                 </Tab.Panel>
                 <Tab.Panel>
                     Reviews

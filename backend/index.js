@@ -33,6 +33,17 @@ async function run() {
       const result = await productCollection.find().toArray();
       res.send(result)
     })
+    // Get Single product Data
+    app.get('/product/:id', async(req, res)=>{
+      const id= req.params.id;
+      const query = {
+        _id: new ObjectId(id)
+      }
+      const result = await productCollection.findOne(query)
+      res.send(result)
+    })
+    // Get Filtering Data
+    app.get('/products')
 
     // all Database collection
     const database=client.db('furnito');

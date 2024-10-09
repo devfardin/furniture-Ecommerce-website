@@ -14,8 +14,6 @@ const Shop = () => {
   const handleSearch = (e) => {
     setSearchResult(e.target.value.toLowerCase())
   }
-;
-// const [selected, setSelected] = useState('')
 
   return (
     <div>
@@ -27,7 +25,6 @@ const Shop = () => {
         <div className='mt-14 grid grid-cols-11 justify-between gap-10'>
           <div className=' lg:col-span-3 '>
             <Filter handelCategory={handelCategory} handleSearch={handleSearch}
-            // selected={selected} setSelected={setSelected} 
             />
           </div>
           <div className='col-span-9 lg:col-span-8'>

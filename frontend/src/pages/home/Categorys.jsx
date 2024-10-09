@@ -31,6 +31,7 @@ const Categorys = () => {
         setLoading(false);
       });
   }, []);
+  
   return (
     <div className="mt-16">
       <Container>

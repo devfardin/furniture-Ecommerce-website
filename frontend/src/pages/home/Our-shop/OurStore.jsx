@@ -45,11 +45,12 @@ const OurStore = () => {
           des='Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vitae vivamus morbi et ornare est Orci et sed commodo.' />
         <div>
           {
-            loading ? <Loader /> : <div>
+            loading ? <Loader /> 
+            : <div>
               <div className='flex justify-center overflow-x-auto items-center gap-8'>
                 {
                   categorys.map((category, index) => <div onClick={() => handleFilter(category.category)}>
-                    <h1 className={`text-base font-medium cursor-pointer text-heading hover:text-primary transition-all duration-300 border-b pb-3 hover:border-primary ${categoryName== category.category?'text-primary  border-b border-primary':'text-heading border-transparent'}`}>{category.category}</h1>
+                    <h1 className={`text-base font-medium cursor-pointer text-heading hover:text-primary transition-all duration-300 border-b pb-3 hover:border-primary ${categoryName== category?.category?'text-primary  border-b border-primary':'text-heading border-transparent'}`}>{category?.category}</h1>
                   </div>)
                 }
               </div>
@@ -58,7 +59,7 @@ const OurStore = () => {
         </div>
       </Container>
       <div className='mt-10'>
-        <Products />
+        <Products  />
       </div>
     </div>
   )
