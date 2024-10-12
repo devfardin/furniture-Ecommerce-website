@@ -58,7 +58,7 @@ const Footer = () => (
         <div>
           <h1 className='text-2xl font-normal text-heading mb-5'>Important Link</h1>
           {
-            imporLink.map((link, indexe)=> <div>
+            imporLink.map((link, index)=> <div key={index}>
               <Link className='text-base font-normal text-[#666666] hover:text-primary duration-200 transition-all flex gap-2 items-center mb-3'
               to={link.link}>
               <IoIosArrowForward/>  {link.name}
@@ -71,7 +71,7 @@ const Footer = () => (
         <div>
           <h1 className='text-2xl font-normal text-heading mb-5'>Services Link</h1>
           {
-            imporLink.map((link, indexe)=> <div>
+            imporLink.map((link, index)=> <div key={index}>
               <Link className='text-base font-normal text-[#666666] hover:text-primary duration-200 transition-all flex gap-2 items-center mb-3'
               to={link.link}>
               <IoIosArrowForward/>  {link.name}

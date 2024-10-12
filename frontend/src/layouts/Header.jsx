@@ -11,8 +11,10 @@ import logo from "./../assets/images/logo.png";
 import MobileMenu from "../components/MobileMenu";
 import LinkButton from "../components/shared/LinkButton";
 import LinkButtonOut from "../components/shared/LinkButtonOut";
+import useAuth from "../hooks/useAuth";
 const Header = () => {
   const [isOpenMenu, setIsOpenMenu] = useState(false);
+  const { user, logOut } = useAuth();
   const click = () => alert("hello");
   const menuItems = [
     {
@@ -104,7 +106,7 @@ const Header = () => {
                   </div>
                   {/* Hover cart */}
                   <div className="absolute group-hover:scale-100 scale-0 delay-150 group-hover:block duration-150 ease-in-out p-5 right-0 z-10 w-[400px] shadow-md bg-white">
-                  <h1 className="text-lg font-normal text-neutral-600">
+                    <h1 className="text-lg font-normal text-neutral-600">
                       No Items In Wishlist
                     </h1>
                     <LinkButton
@@ -112,8 +114,11 @@ const Header = () => {
                       fullWidth={true}
                       link={"/about-us"}
                     ></LinkButton>
-                    <LinkButtonOut label={'Wishlist'} fullWidth={true} link={'/wishlist'}>
-                    </LinkButtonOut>
+                    <LinkButtonOut
+                      label={"Wishlist"}
+                      fullWidth={true}
+                      link={"/wishlist"}
+                    ></LinkButtonOut>
                   </div>
                 </div>
 
@@ -154,20 +159,42 @@ const Header = () => {
                     duration-500 ease-in-out  group-hover:block"
                   >
                     <div className="flex flex-col items-center justify-center">
-                      <Link
-                        className="hover:bg-primary hover:text-white duration-200
-                        py-3 px-5 text-start text-base font-normal border-b w-full"
-                        to="/login"
-                      >
-                        Login
-                      </Link>
-                      <Link
+                      {user ? (
+                        <>
+                         <Link
+                          className="hover:bg-primary hover:text-white duration-200
+                         py-3 px-5 text-start text-base w-full border-b"
+                          to="./register"
+                        >
+                          Dashboard
+                        </Link>
+
+                        <button
                         className="hover:bg-primary hover:text-white duration-200
                          py-3 px-5 text-start text-base w-full"
-                        to="./register"
-                      >
-                        Register
-                      </Link>
+                        onClick={()=> logOut()}>
+                          Log Out
+                        </button>
+
+                        </>
+                      ) : (
+                        <>
+                          <Link
+                            className="hover:bg-primary hover:text-white duration-200
+                        py-3 px-5 text-start text-base font-normal border-b w-full"
+                            to="/login"
+                          >
+                            Login
+                          </Link>
+                          <Link
+                            className="hover:bg-primary hover:text-white duration-200
+                         py-3 px-5 text-start text-base w-full"
+                            to="./register"
+                          >
+                            Register
+                          </Link>
+                        </>
+                      )}
                     </div>
                   </div>
                 </div>
