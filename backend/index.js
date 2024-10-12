@@ -28,6 +28,11 @@ async function run() {
     // Connect the client to the server	(optional starting in v4.7)
     await client.connect();
 
+        // all Database collection
+        const database=client.db('furnito');
+        const productCollection = database.collection('products');
+        const usersCollection = database.collection('users')
+
     // All Get Method 
     app.get('/products', async(req, res) =>{
       const result = await productCollection.find().toArray();
@@ -42,12 +47,11 @@ async function run() {
       const result = await productCollection.findOne(query)
       res.send(result)
     })
-    // Get Filtering Data
-    app.get('/products')
+    
+    // Post Data Method
+    
 
-    // all Database collection
-    const database=client.db('furnito');
-    const productCollection = database.collection('products');
+
 
 
     // Send a ping to confirm a successful connection
