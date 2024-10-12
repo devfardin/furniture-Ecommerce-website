@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import PageHeader from "../../components/shared/PageHeader";
 import Container from "../../components/shared/Container";
 import { FiMinus, FiPlus } from "react-icons/fi";
-import { FaPlus } from "react-icons/fa";
 import { IoHeartOutline } from "react-icons/io5";
 import { AiOutlineRetweet } from "react-icons/ai";
 import SingleUserInfo from "../../components/shared/SingleUserInfo";
@@ -17,6 +16,7 @@ import Loader from "../../components/shared/Loader";
 const ShopSingle = () => {
   const [productQuantity, setProductQuantity] = useState(1);
   const { id } = useParams();
+
   const { data, isLoading } = useQuery({
     queryKey: ["product", id],
     queryFn: async () => {
