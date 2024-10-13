@@ -13,6 +13,7 @@ import ShopSingle from "../pages/SinglePage/ShopSingle.jsx";
 import CompareProduct from "../pages/compareProduct";
 import WishList from "../pages/wishlist";
 import NotFound from "../pages/notFound/NotFound";
+import Dashboard from "../layouts/dashboard/Dashboard.jsx";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -72,5 +73,9 @@ const router = createBrowserRouter([
     },
     ]
   },
+  {
+    path:'dashboard',
+    element: <Dashboard/>
+  }
 ]);
 export default router
