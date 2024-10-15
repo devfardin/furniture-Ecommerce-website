@@ -49,7 +49,21 @@ async function run() {
     })
     
     // Post Data Method
-    
+    // Save or  modify user email
+    app.put('/users/:email', async(req, res)=>{
+      const email= req.params.email;
+      const user = req.body;
+      const query = { email:email }
+      const option = { upsert: true }
+      const isExist = await usersCollection.findOne( query );
+      console.log( 'User Found' , isExist )
+      if(isExist){
+        return res.send(isExist)
+      } else{
+        
+      }
+
+    })
 
 
 

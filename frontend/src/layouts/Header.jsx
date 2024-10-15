@@ -164,7 +164,7 @@ const Header = () => {
                          <Link
                           className="hover:bg-primary hover:text-white duration-200
                          py-3 px-5 text-start text-base w-full border-b"
-                          to="./register"
+                          to="/dashboard"
                         >
                           Dashboard
                         </Link>

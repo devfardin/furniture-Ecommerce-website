@@ -14,6 +14,8 @@ import CompareProduct from "../pages/compareProduct";
 import WishList from "../pages/wishlist";
 import NotFound from "../pages/notFound/NotFound";
 import Dashboard from "../layouts/dashboard/Dashboard.jsx";
+import Profile from "../dashboard/pages/Profile.jsx";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -74,8 +76,14 @@ const router = createBrowserRouter([
     ]
   },
   {
-    path:'dashboard',
-    element: <Dashboard/>
+    path:'/dashboard',
+    element: <Dashboard/>,
+    children: [
+      {
+        path:'profile',
+        element: <Profile/>
+      }
+    ]
   }
 ]);
 export default router

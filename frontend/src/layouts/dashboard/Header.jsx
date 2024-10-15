@@ -54,7 +54,7 @@ const Header = ({ isOpen, setIsOpen }) => {
                   <div className="px-1 py-1 ">
                     <Menu.Item>
                       <Link
-                        to="/profile"
+                        to="profile"
                         className=" hover:bg-primary hover:text-white text-base font-normal flex w-full gap-1 items-center rounded-md px-2 py-1 text-primary"
                       >
                         <FiUser></FiUser>
