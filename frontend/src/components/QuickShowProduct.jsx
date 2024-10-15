@@ -51,7 +51,9 @@ const QuickShowProduct = ({ isOpen, setIsOpen, id }) => {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className={`w-full max-w-6xl transform overflow-hidden rounded-lg bg-white p-6 text-left align-middle shadow-xl transition-all`}>
+                <Dialog.Panel
+                  className={`w-full max-w-6xl transform overflow-hidden rounded-lg bg-white p-6 text-left align-middle shadow-xl transition-all`}
+                >
                   {/* clone Icon */}
                   <button className="absolute right-5" onClick={closeModal}>
                     <IoCloseOutline className="text-3xl text-primary"></IoCloseOutline>
