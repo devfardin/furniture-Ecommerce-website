@@ -2,16 +2,33 @@ import React from "react";
 import { FiMenu, FiUser } from "react-icons/fi";
 import { SlCalender } from "react-icons/sl";
 import { Menu } from "@headlessui/react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { IoSettingsOutline } from "react-icons/io5";
 import { PiSignOut } from "react-icons/pi";
 import { IoIosArrowDown } from "react-icons/io";
-import adminAvather from '../../assets/images/admin.jpg'
+import adminAvather from "../../assets/images/admin.jpg";
+import { HiXMark } from "react-icons/hi2";
+import useAuth from "../../hooks/useAuth";
+import toast from "react-hot-toast";
+
 const Header = ({ isOpen, setIsOpen }) => {
+  const { logOut } = useAuth();
   const date = new Date();
   const year = date.getFullYear();
   const month = date.toLocaleDateString("default", { month: "long" });
   const day = date.getDate();
+  const navitage = useNavigate();
+
+  const handleSignOut = () => {
+    logOut()
+      .then((sucess) => {
+        toast.success("You have successfully logged out");
+        navitage("/");
+      })
+      .catch((error) => {
+        toast.error(error, "Error logging out. Please try again.");
+      });
+  };
 
   return (
     // Header wrpper Start
@@ -19,11 +36,8 @@ const Header = ({ isOpen, setIsOpen }) => {
       {/* header innder container star */}
       <div className="flex justify-between items-center gap-5 ">
         {/* Left start */}
-        <div className="">
-          <FiMenu
-            onClick={() => setIsOpen(!isOpen)}
-            className="text-2xl hover:text-primary duration-300"
-          />
+        <div className="cursor-pointer" onClick={() => setIsOpen(!isOpen)}>
+          <FiMenu className="text-2xl hover:text-primary duration-300" />
         </div>
 
         {/* Right Start */}
@@ -41,10 +55,18 @@ const Header = ({ isOpen, setIsOpen }) => {
                 <div>
                   <Menu.Button>
                     <div class="flex gap-2 sm:gap-4 items-center">
-                      <img className="w-14 h-14 rounded-full" src={adminAvather} alt="" />
+                      <img
+                        className="w-14 h-14 rounded-full"
+                        src={adminAvather}
+                        alt=""
+                      />
                       <div className="hidden sm:flex flex-col justify-center">
-                        <span className="text-base lg:text-lg font-normal text-primary text-center">Admin</span>
-                        <h2 className="flex items-center gap-2 text-base lg:text-lg font-semibold">Fardin Ahmed <IoIosArrowDown/></h2>
+                        <span className="text-base lg:text-lg font-normal text-primary text-center">
+                          Admin
+                        </span>
+                        <h2 className="flex items-center gap-2 text-base lg:text-lg font-semibold">
+                          Fardin Ahmed <IoIosArrowDown />
+                        </h2>
                       </div>
                     </div>
                   </Menu.Button>
@@ -73,13 +95,13 @@ const Header = ({ isOpen, setIsOpen }) => {
                     </Menu.Item>
 
                     <Menu.Item>
-                      <Link
-                        to="/profile"
+                      <button
+                        onClick={handleSignOut}
                         className=" hover:bg-primary hover:text-white text-base font-normal flex w-full gap-1 items-center rounded-md px-2 py-1 text-primary"
                       >
                         <PiSignOut />
                         Logout
-                      </Link>
+                      </button>
                     </Menu.Item>
                   </div>
                 </Menu.Items>

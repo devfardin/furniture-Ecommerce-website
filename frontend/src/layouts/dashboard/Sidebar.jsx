@@ -1,28 +1,39 @@
 import React, { useState } from "react";
 import { RxCross2 } from "react-icons/rx";
 import dashboardLogo from "../../assets/images/dashboard-logo.png";
-import SidebarLink from "../../dashboard/components/SidebarLink";
-import { FiUser } from "react-icons/fi";
-import SidebarButton from "../../dashboard/components/SidebarButton";
-import { MdOutlineLockReset } from "react-icons/md";
+import { Link, useNavigate } from "react-router-dom";
+import adminAvather from "../../assets/images/admin.jpg";
+import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
-import Modal from "../../components/shared/Modal";
-import ForgotPassword from "../../pages/authentication/ForgotPassword";
-import ForgetPassForm from "../../pages/authentication/ForgetPassForm";
+import AdminMenuItems from "../../dashboard/admin/AdminMenuItems";
 
 const Sidebar = ({ isOpen, setIsOpen }) => {
-  const [isModalOpen, setisModalOpen] = useState(false);
+  const { logOut } = useAuth();
+  const navitage = useNavigate();
 
-  const handlePasswordRest = () => {
-    setisModalOpen(true);
+  const handleSignOut = () => {
+    logOut()
+      .then((sucess) => {
+        toast.success("You have successfully logged out");
+        navitage("/");
+      })
+      .catch((error) => {
+        toast.error("Error logging out. Please try again.");
+      });
   };
 
   return (
     <div className=" bg-white overflow-hidden">
-      <div className="flex justify-between flex-col gap-5 h-screen">
+      <div className="flex  flex-col  gap-5 overflow-y-auto h-screen">
         {/* Side bar Logo and title start */}
-        <div className="flex sticky top-0 justify-between items-center gap-5 border-b border-[#ededed]  p-3">
-          <div className="flex gap-2 items-cente">
+        <div
+          className={`${
+            isOpen
+              ? "flex transition-all duration-300 justify-between items-center gap-5 py-3 px-6"
+              : "p-3 text-center flex justify-between items-center  transition-all duration-300"
+          } border-b border-dashBorder sticky top-0 bg-white`}
+        >
+          <div className="flex gap-2 items-center">
             <img className="w-12" src={dashboardLogo} alt="" />
             <div className="flex-1">
               <span
@@ -43,46 +54,48 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
         </div>
         {/* Sidebar logo and Title end */}
 
-        <div className="sticky bottom-0 border-t border-[#ededed] p-3">
-          <h4
+        {/* Sidebar Menu Items Start */}
+        <div className="">
+          <AdminMenuItems isOpen={isOpen} />
+        </div>
+        {/* Sidebar Menu Items Start */}
+
+        {/* Sidebar Footer Start */}
+        <Link
+          to={"profile"}
+          className={`${
+            isOpen
+              ? " flex items-center py-3 px-6 gap-4 mb-2"
+              : " p-2 flex gap-5"
+          } border-t border-dashBorder mt-auto  bg-white `}
+        >
+          <div>
+            <img
+              className="w-[55px] h-[55px] object-cover rounded-full"
+              src={adminAvather}
+              alt="User Profile"
+            />
+          </div>
+          <div
             className={` ${
               isOpen
-                ? "text-pera text-base font-normal mb-3 duration-300 transition-all opacity-100"
-                : "opacity-0"
+                ? "flex flex-col gap-0.5 opacity-100"
+                : "md:opacity-0 md:hidden transition-opacity delay-50000 duration-300"
             } `}
           >
-            AUTHENTICATION
-          </h4>
-
-          <SidebarLink
-            to={"profile"}
-            label="Profile"
-            icon={FiUser}
-            isOpen={isOpen}
-          ></SidebarLink>
-          <SidebarLink
-            to={"Setting"}
-            label="Setting"
-            icon={FiUser}
-            isOpen={isOpen}
-          ></SidebarLink>
-          <SidebarButton
-            lable="Reset Password"
-            btnHandle={handlePasswordRest}
-            icon={MdOutlineLockReset}
-            isOpen={isOpen}
-          ></SidebarButton>
-        </div>
+            {/* User Name */}
+            <h3 className="text-base font-medium text-[#260944] hover:text-primary transition-all duration-300 cursor-pointer">
+              Fardin Ahmed
+            </h3>
+            <button
+              onClick={handleSignOut}
+              className="text-base font-normal text-pera hover:text-primary transition-all duration-300"
+            >
+              Log Out
+            </button>
+          </div>
+        </Link>
       </div>
-
-      <Modal maxWidth={'max-w-xl'}
-        isModalOpen={isModalOpen}
-        handlePasswordRest={handlePasswordRest}
-        setisModalOpen={setisModalOpen}
-      >
-        <ForgetPassForm/>
-
-      </Modal>
     </div>
   );
 };

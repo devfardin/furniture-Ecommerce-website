@@ -11,7 +11,11 @@ export default {
           primary:'#599A8D',
           heading: '#333333',
           bg: '#F4F8FB',
-          pera: '#666666'
+          pera: '#666666',
+          dashPrimary: '#757FEF',
+          dashHoverBg: '#F5F5F9',
+          dashColor: '#260944',
+          dashBorder: '#ededed'
         }
       
     },

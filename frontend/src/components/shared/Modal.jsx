@@ -1,14 +1,14 @@
-import React, { Children } from "react";
+import React from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
 import { IoCloseOutline } from "react-icons/io5";
 
 const Modal = ({
-  Children,
   handlePasswordRest,
   maxWidth,
   isModalOpen,
   setisModalOpen,
+  children
 }) => {
   function closeModal() {
     setisModalOpen(false);
@@ -48,8 +48,7 @@ const Modal = ({
                   <button className="absolute right-5" onClick={closeModal}>
                     <IoCloseOutline className="text-3xl text-primary"></IoCloseOutline>
                   </button>
-                  {/* Modal Body */}
-                  {Children}
+                  {children}
                 </Dialog.Panel>
               </Transition.Child>
             </div>
