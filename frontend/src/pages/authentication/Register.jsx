@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import PageHeader from "../../components/shared/PageHeader";
-import { Link, useNavigation } from "react-router-dom";
+import { Link, useNavigate, useNavigation } from "react-router-dom";
 import { IoMdEyeOff } from "react-icons/io";
 import { FaRegEye } from "react-icons/fa";
 import { Country, State, City } from "country-state-city";
 import useAuth from "../../hooks/useAuth";
 import toast from 'react-hot-toast'
 import BtnLoader from "../../components/shared/BtnLoader";
+import axios from "axios";
 
 const Register = () => {
   const { createUser, loading, setLoading } = useAuth()
@@ -15,7 +16,7 @@ const Register = () => {
   const [showConfirmPass, setConfirmPass] = useState(false);
   const [countryName, setCountry] = useState(Country.getAllCountries()[0]);
   const [stateData, setStateData] = useState(["select"]);
-  const navigation = useNavigation()
+  const navigation = useNavigate()
 
   const countrySelector = (e) => {
     const [isoCode, name] = e.target.value.split(':'); 
@@ -30,7 +31,7 @@ const Register = () => {
   }, [countryName]);
 
   
-  const registerHandle = (e) => {
+  const registerHandle = async(e) => {
     e.preventDefault();
     const form = e.target;
 
@@ -98,10 +99,15 @@ const Register = () => {
 
     try{
       createUser( email, password )
-      .then( success=>{
+      .then( async(success)=>{
         toast.success('Registration successful! Welcome to Furnito');
+
+       await axios.put( `${import.meta.env.VITE_API_URL}/user`,registerInfo)
+      
+        navigation('/dashboard')
+       
+
         
-        navigation('/dashboard');
       })
       .catch( error => {
         const message = error.message.slice(22,42);
