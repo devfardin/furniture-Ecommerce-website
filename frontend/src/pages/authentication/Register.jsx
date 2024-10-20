@@ -6,6 +6,7 @@ import { FaRegEye } from "react-icons/fa";
 import { Country, State, City } from "country-state-city";
 import useAuth from "../../hooks/useAuth";
 import toast from 'react-hot-toast'
+import BtnLoader from "../../components/shared/BtnLoader";
 
 const Register = () => {
   const { createUser, loading, setLoading } = useAuth()
@@ -74,26 +75,10 @@ const Register = () => {
     } else if (!validation.number.test(password)) {
       setErrorMessage("At least one Number");
       return;
+    } else if( !email ){
+      return setErrorMessage('Email is required')
     }
-   
-    try{
-      createUser( email, password )
-      .then( success=>{
-        toast.success('Registration successful! Welcome to')
-        navigation('/dashboard');
-      })
-      .catch( error => {
-        const message = error.message.slice(22,42);
-        toast.error(`Registration failed. ${ message  }`);
-        setLoading(false);
-      } )
-    } 
-    catch{
-
-    }
-    
-    
-
+  
     const registerInfo = {
       firstName,
       lastName,
@@ -111,15 +96,31 @@ const Register = () => {
       updatedAt
     };
 
+    try{
+      createUser( email, password )
+      .then( success=>{
+        toast.success('Registration successful! Welcome to Furnito');
+        
+        navigation('/dashboard');
+      })
+      .catch( error => {
+        const message = error.message.slice(22,42);
+        toast.error(`Registration failed. ${ message  }`);
+        setLoading(false);
+      } )
+    } 
+    catch{
+      toast.error('An unexpected error occurred. Please try again later.')
+    }
 
 
-    console.log(registerInfo);
     
   };
   return (
     <div>
       <PageHeader page="User Register" />
       <div className="mt-10 mx-3">
+       
         <div className="md:max-w-xl  lg:max-w-2xl mx-auto">
           <h2 className="text-3xl font-medium mb-5">Sign Up</h2>
 
@@ -137,7 +138,7 @@ const Register = () => {
                   type="text"
                   placeholder="Enter your First Name"
                   name="first"
-                  required
+                  
                   className="border border-[#ced4da]  w-full px-3 py-3 focus:border-primary transition-all duration-300 rounded-sm outline-none text-lg font-normal"
                 />
               </div>
@@ -153,7 +154,7 @@ const Register = () => {
                   type="text"
                   placeholder="Enter your Last Name"
                   name="last"
-                  required
+                  
                   className="border border-[#ced4da]  w-full px-3 py-3 focus:border-primary transition-all duration-300 rounded-sm outline-none text-lg font-normal"
                 />
               </div>
@@ -171,7 +172,7 @@ const Register = () => {
                 type="email"
                 placeholder="Enter your Email"
                 name="email"
-                required
+                
                 className="border border-[#ced4da]  w-full px-3 py-3 focus:border-primary transition-all duration-300 rounded-sm outline-none text-lg font-normal"
               />
             </div>
@@ -188,7 +189,7 @@ const Register = () => {
                 type="number"
                 placeholder="Enter your Number"
                 name="phoneNumber"
-                required
+                
                 className="border border-[#ced4da]  w-full px-3 py-3 focus:border-primary transition-all duration-300 rounded-sm outline-none text-lg font-normal"
               />
             </div>
@@ -277,7 +278,7 @@ const Register = () => {
                     type={showPassword ? "text" : "password"}
                     placeholder="Enter your Password"
                     name="password"
-                    required
+                    defaultValue={'Ontorfardin2020@'}
                     className="border border-[#ced4da]  w-full px-3 py-3 focus:border-primary transition-all duration-300 rounded-sm outline-none text-lg font-normal"
                   />
                   <span onClick={() => setShowPassword(!showPassword)}>
@@ -300,6 +301,7 @@ const Register = () => {
                   <input
                     type={showConfirmPass ? "text" : "password"}
                     placeholder="Enter Confirmed Password"
+                    defaultValue={'Ontorfardin2020@'}
                     name="conPassword"
                     className="border border-[#ced4da]  w-full px-3 py-3 focus:border-primary transition-all duration-300 rounded-sm outline-none text-lg font-normal"
                   />
@@ -319,11 +321,10 @@ const Register = () => {
 
             {/* Submit Button */}
             <div className="mt-5">
-              <input
-                type="submit"
-                value={ loading ? 'Sign Up' : 'Loading'}
-                className="text-lg w-full font-normal hover:text-primary border  outline-none hover:border-primary hover:bg-transparent rounded-sm hover:rounded-sm py-3 transition-all duration-300 text-white cursor-pointer bg-primary"
-              />
+              <button 
+              type="submit"
+              className="text-lg text-center flex justify-center w-full font-normal hover:text-white hover:bg-primary border  outline-none hover:border-primary  rounded-sm hover:rounded-sm py-3 transition-all duration-300 text-white cursor-pointer bg-primary"
+              > { !loading ? 'Sign Up'  : <BtnLoader/> }</button>
             </div>
             <div className="mt-3">
               <h1 className="text-base font-normal text-heading">

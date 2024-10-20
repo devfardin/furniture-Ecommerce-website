@@ -15,6 +15,7 @@ import WishList from "../pages/wishlist";
 import NotFound from "../pages/notFound/NotFound";
 import Dashboard from "../layouts/dashboard/Dashboard.jsx";
 import Profile from "../dashboard/pages/Profile.jsx";
+import Products from "../dashboard/pages/Products.jsx";
 
 const router = createBrowserRouter([
   {
@@ -82,7 +83,11 @@ const router = createBrowserRouter([
       {
         path:'profile',
         element: <Profile/>
-      }
+      },
+      {
+        path: 'products',
+        element: <Products/>
+      },
     ]
   }
 ]);

@@ -1,16 +1,15 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import PageHeader from "../../components/shared/PageHeader";
-import Container from "../../components/shared/Container";
 import { Link, useNavigate } from "react-router-dom";
-import Button from "../../components/shared/Button";
 import { IoMdEyeOff } from "react-icons/io";
 import { FaRegEye } from "react-icons/fa";
 import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
+import BtnLoader from "../../components/shared/BtnLoader";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const { loginUser } = useAuth();
+  const { loginUser, loading, setLoading } = useAuth();
   const navagation = useNavigate()
 
   const handleLoginSubmit = (e) => {
@@ -21,14 +20,14 @@ const Login = () => {
   
     loginUser(email, password)
         .then( success => {
-            toast.success('Login SUccess')
+            toast.success('Login Success')
             form.reset();
             navagation('/dashboard');
             return
         } )
         .catch( error => {
             toast.error(error.message)
-            console.log(error);
+            setLoading(false);
         })
  
     
@@ -110,11 +109,10 @@ const Login = () => {
             </div>
             {/* Submit Button */}
             <div className="mt-3">
-              <input
-                type="submit"
-                value="Login"
-                className="text-lg w-full font-normal hover:text-primary border hover:border-primary hover:bg-transparent rounded-sm hover:rounded-sm py-3 transition-all duration-300 text-white cursor-pointer bg-primary"
-              />
+            <button 
+              type="submit"
+              className="text-lg text-center flex justify-center w-full font-normal hover:text-white hover:bg-primary border  outline-none hover:border-primary  rounded-sm hover:rounded-sm py-3 transition-all duration-300 text-white cursor-pointer bg-primary"
+              > { !loading ? 'Login'  : <BtnLoader/> }</button>
             </div>
             <div className="mt-3">
               <h1 className="text-base font-normal text-heading">

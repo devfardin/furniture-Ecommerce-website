@@ -2,12 +2,12 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import {
   MdKeyboardArrowRight,
-  MdOutlineKeyboardArrowDown,
 } from "react-icons/md";
 const SidebarLink = ({ to, label, icon: Icon, isOpen }) => {
   return (
     <div>
       <NavLink
+        end
         to={to}
         className={({ isActive }) => ` ${
           isOpen ? "justify-start" : "md:justify-center"
@@ -20,7 +20,11 @@ const SidebarLink = ({ to, label, icon: Icon, isOpen }) => {
       >
         <span className="flex items-center gap-2">
           <Icon className={` ${isOpen ? "" : "text-xl"} text-2xl`}> </Icon>
-          <span className={`${isOpen ? "" : "md:hidden"} text-lg font-normal leading-5`}>
+          <span
+            className={`${
+              isOpen ? "" : "md:hidden"
+            } text-lg font-normal leading-5`}
+          >
             {label}
           </span>
         </span>
