@@ -36,11 +36,13 @@ const AuthProviders = ({ children }) => {
     setLoading(true)
     return sendPasswordResetEmail(email);
   }
-  const uploadUserProfile = (name, photo) => {
+  const uploadUserProfile = (name, photo, number) => {
     setLoading(true)
     return updateProfile( auth.currentUser,{
         displayName: name,
-        photoURL: photo
+        photoURL: photo,
+        phoneNumber: number
+
     } )
   }
   useEffect(() => {

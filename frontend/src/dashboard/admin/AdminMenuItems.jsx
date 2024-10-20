@@ -1,86 +1,95 @@
 import React from "react";
 import SidebarLink from "../../dashboard/components/SidebarLink";
 import { BsShop, BsCartCheck } from "react-icons/bs";
-import {
-  MdOutlineArticle,
-  MdOutlineDiscount,
-  MdSupportAgent,
-} from "react-icons/md";
-import { MdOutlineInventory2, MdOutlineReviews } from "react-icons/md";
 import { RxDashboard } from "react-icons/rx";
 import { TbUserStar } from "react-icons/tb";
 import { FaRegBell } from "react-icons/fa";
+import { TfiShoppingCartFull } from "react-icons/tfi";
+import { CiSignpostDuo1 } from "react-icons/ci";
+import {
+  MdOutlineAddBusiness,
+  MdOutlineArticle,
+  MdOutlineDiscount,
+  MdSupportAgent,
+  MdOutlineInventory2,
+  MdOutlineReviews
+} from "react-icons/md";
 
 const AdminMenuItems = ({ isOpen }) => {
+  const adminMenuLinks =[
+    {
+      label: 'Dashboard',
+      link: '/dashboard',
+      icon: RxDashboard,
+    },
+    {
+      label:'All Products',
+      link:'/all-products',
+      icon:BsShop,
+    },
+    {
+      label: 'Add Product',
+      link:'/add-product',
+      icon: MdOutlineAddBusiness,
+    },
+    {
+      label: 'Product Categories',
+      link:'/product-categories',
+      icon: TfiShoppingCartFull,
+    },
+    {
+      label: 'Orders',
+      link:'/orders',
+      icon: BsCartCheck,
+    },
+    {
+      label: 'Inventory Management',
+      link:'/inventory-management',
+      icon: MdOutlineInventory2,
+    },
+    {
+      label: 'Discounts & Coupons',
+      link:'/discounts-coupons',
+      icon: MdOutlineDiscount,
+    },
+    {
+      label: 'Reviews & Feedback',
+      link:'/reviews-feedback',
+      icon: MdOutlineReviews,
+    },
+    {
+      label: 'Support',
+      link:'/support',
+      icon: MdSupportAgent,
+    },
+    {
+      label: 'User Management',
+      link:'/users',
+      icon: TbUserStar,
+    },
+    {
+      label: 'Post Management',
+      link:'/posts',
+      icon: MdOutlineArticle,
+    },
+    {
+      label: 'Post Categories',
+      link:'/posts-categories',
+      icon: CiSignpostDuo1,
+    },
+    {
+      label: 'Notification Center',
+      link:'/notification',
+      icon: FaRegBell,
+    },
+    
+
+  ]
   return (
     <div className="flex justify-self-start flex-col gap-3">
-      <SidebarLink
-        to={"/dashboard"}
-        label="Dashboard"
-        icon={RxDashboard}
-        isOpen={isOpen}
-      />
-      <SidebarLink
-        to={"all-products"}
-        label="All Products"
-        icon={BsShop}
-        isOpen={isOpen}
-      />
-      <SidebarLink
-        to={"all-products"}
-        label="Add Product"
-        icon={BsShop}
-        isOpen={isOpen}
-      />
-      <SidebarLink
-        to={"orders"}
-        label="Orders"
-        icon={BsCartCheck}
-        isOpen={isOpen}
-      />
-
-      <SidebarLink
-        to={"orders"}
-        label="Inventory Management"
-        icon={MdOutlineInventory2}
-        isOpen={isOpen}
-      />
-      <SidebarLink
-        to={"orders"}
-        label="Discounts & Coupons"
-        icon={MdOutlineDiscount}
-        isOpen={isOpen}
-      />
-      <SidebarLink
-        to={"orders"}
-        label="Reviews & Feedback"
-        icon={MdOutlineReviews}
-        isOpen={isOpen}
-      />
-      <SidebarLink
-        to={"support"}
-        label="Support"
-        icon={MdSupportAgent}
-        isOpen={isOpen}
-      />
-      <SidebarLink
-        to={"all-users"}
-        label="User Management"
-        icon={TbUserStar}
-        isOpen={isOpen}
-      />
-      <SidebarLink
-        to={"all-users"}
-        label="Post Management"
-        icon={MdOutlineArticle}
-        isOpen={isOpen}
-      />
-      <SidebarLink
-        to={"all-users"}
-        label="Notification Center"
-        icon={FaRegBell}
-        isOpen={isOpen}
-      />
+      {
+        adminMenuLinks.map( (adminLink, index)=> <SidebarLink key={index} to={adminLink.link} label={adminLink.label} icon={adminLink.icon} isOpen={isOpen}/> )
+      }
     </div>
   );
 };

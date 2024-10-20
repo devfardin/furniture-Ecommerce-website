@@ -1,16 +1,20 @@
 import React, { useEffect, useState } from "react";
 import PageHeader from "../../components/shared/PageHeader";
-import { Link } from "react-router-dom";
+import { Link, useNavigation } from "react-router-dom";
 import { IoMdEyeOff } from "react-icons/io";
 import { FaRegEye } from "react-icons/fa";
 import { Country, State, City } from "country-state-city";
+import useAuth from "../../hooks/useAuth";
+import toast from 'react-hot-toast'
 
 const Register = () => {
+  const { createUser, loading, setLoading } = useAuth()
   const [errorMessage, setErrorMessage] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPass, setConfirmPass] = useState(false);
   const [countryName, setCountry] = useState(Country.getAllCountries()[0]);
   const [stateData, setStateData] = useState(["select"]);
+  const navigation = useNavigation()
 
   const countrySelector = (e) => {
     const [isoCode, name] = e.target.value.split(':'); 
@@ -48,15 +52,16 @@ const Register = () => {
     const createdAt= new Date();
     const updatedAt= new Date();
 
-
     const validation = {
       capital: /[A-Z]/,
       spacelSymble: /[\W_]+/,
       number: /[0-9]/,
     };
     setErrorMessage("");
+
     if (password !== conPassword) {
       setErrorMessage("Passwords do not match");
+      return
     } else if (password.length < 6) {
       setErrorMessage("password must be at least 6 characters long.");
       return;
@@ -70,11 +75,29 @@ const Register = () => {
       setErrorMessage("At least one Number");
       return;
     }
+   
+    try{
+      createUser( email, password )
+      .then( success=>{
+        toast.success('Registration successful! Welcome to')
+        navigation('/dashboard');
+      })
+      .catch( error => {
+        const message = error.message.slice(22,42);
+        toast.error(`Registration failed. ${ message  }`);
+        setLoading(false);
+      } )
+    } 
+    catch{
+
+    }
+    
+    
 
     const registerInfo = {
       firstName,
       lastName,
-      phoneNumber,
+      phone,
       email,
       country,
       state,
@@ -86,8 +109,12 @@ const Register = () => {
       status,
       createdAt,
       updatedAt
-
     };
+
+
+
+    console.log(registerInfo);
+    
   };
   return (
     <div>
@@ -199,7 +226,7 @@ const Register = () => {
                   className="border border-[#ced4da]  w-full px-3 py-3 focus:border-primary transition-all duration-300 rounded-sm outline-none text-lg font-normal"
                 >
                   {stateData?.map((state, index) => (
-                    <option> {state?.name} </option>
+                    <option key={index}> {state?.name} </option>
                   ))}
                 </select>
               </div>
@@ -254,7 +281,7 @@ const Register = () => {
                     className="border border-[#ced4da]  w-full px-3 py-3 focus:border-primary transition-all duration-300 rounded-sm outline-none text-lg font-normal"
                   />
                   <span onClick={() => setShowPassword(!showPassword)}>
-                    {showPassword ? (
+                    { showPassword ? (
                       <IoMdEyeOff className="text-2xl text-neutral-500 absolute top-3 right-3" />
                     ) : (
                       <FaRegEye className="text-2xl text-neutral-500 absolute top-3 right-3" />
@@ -294,20 +321,19 @@ const Register = () => {
             <div className="mt-5">
               <input
                 type="submit"
-                value="Sign Up"
+                value={ loading ? 'Sign Up' : 'Loading'}
                 className="text-lg w-full font-normal hover:text-primary border  outline-none hover:border-primary hover:bg-transparent rounded-sm hover:rounded-sm py-3 transition-all duration-300 text-white cursor-pointer bg-primary"
               />
             </div>
             <div className="mt-3">
               <h1 className="text-base font-normal text-heading">
-                {" "}
-                Already have an Account?{" "}
+                Already have an Account?
                 <Link
                   to="/login"
                   className=" hover:text-primary font-medium transition-all duration-300 cursor-pointer"
                 >
                   Sign in
-                </Link>{" "}
+                </Link>
               </h1>
             </div>
           </form>

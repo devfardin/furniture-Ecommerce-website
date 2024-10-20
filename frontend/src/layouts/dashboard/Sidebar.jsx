@@ -65,9 +65,9 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
           to={"profile"}
           className={`${
             isOpen
-              ? " flex items-center py-3 px-6 gap-4 mb-2"
+              ? " flex items-center py-3 px-6 gap-4"
               : " p-2 flex gap-5"
-          } border-t border-dashBorder mt-auto  bg-white `}
+          } border-t border-dashBorder mt-auto sticky bottom-0  bg-white `}
         >
           <div>
             <img
