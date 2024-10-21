@@ -15,7 +15,19 @@ import WishList from "../pages/wishlist";
 import NotFound from "../pages/notFound/NotFound";
 import Dashboard from "../layouts/dashboard/Dashboard.jsx";
 import Profile from "../dashboard/pages/Profile.jsx";
-import Products from "../dashboard/pages/Products.jsx";
+import Products from "../dashboard/admin/pages/Products.jsx";
+import AddProduct from "../dashboard/admin/pages/AddProduct.jsx";
+import ProductCategories from "../dashboard/admin/pages/ProductCategories.jsx";
+import Orders from "../dashboard/admin/pages/Orders.jsx";
+import InventoryManage from "../dashboard/admin/pages/InventoryManage.jsx";
+import AdminDashboard from "../dashboard/admin/pages/AdminDashboard.jsx";
+import DiscountsCoupons from "../dashboard/admin/pages/DiscountsCoupons.jsx";
+import ReviewsFeedback from "../dashboard/admin/pages/ReviewsFeedback.jsx";
+import Support from "../dashboard/admin/pages/Support.jsx";
+import UserManage from "../dashboard/admin/pages/UserManage.jsx";
+import Posts from "../dashboard/admin/pages/Posts.jsx";
+import PostCategories from "../dashboard/admin/pages/PostCategories.jsx";
+import Notification from "../dashboard/admin/pages/Notification.jsx";
 
 const router = createBrowserRouter([
   {
@@ -81,12 +93,60 @@ const router = createBrowserRouter([
     element: <Dashboard/>,
     children: [
       {
+        path:'/dashboard',
+        element: <AdminDashboard/>
+      },
+      {
         path:'profile',
         element: <Profile/>
       },
       {
         path: 'products',
         element: <Products/>
+      },
+      {
+        path: 'add-product',
+        element: <AddProduct/>
+      },
+      {
+        path: 'product-categories',
+        element: <ProductCategories/>
+      },
+      {
+        path: 'orders',
+        element: <Orders/>
+      },
+      {
+        path: 'inventory-management',
+        element: <InventoryManage/>
+      },
+      {
+        path: 'discounts-coupons',
+        element: <DiscountsCoupons/>
+      },
+      {
+        path: 'reviews-feedback',
+        element: <ReviewsFeedback/>
+      },
+      {
+        path: 'support',
+        element: <Support/>
+      },
+      {
+        path: 'users',
+        element: <UserManage/>
+      },
+      {
+        path: 'posts',
+        element: <Posts/>
+      },
+      {
+        path: 'posts-categories',
+        element: <PostCategories/>
+      },
+      {
+        path: 'notification',
+        element: <Notification/>
       },
     ]
   }

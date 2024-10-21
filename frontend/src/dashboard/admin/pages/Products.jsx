@@ -3,7 +3,7 @@ import React from 'react'
 const Products = () => {
   return (
     <div>
-      Listed All the Product
+      Get All the Products from admin panel
     </div>
   )
 }
