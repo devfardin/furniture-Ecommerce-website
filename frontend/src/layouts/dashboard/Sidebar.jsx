@@ -6,6 +6,7 @@ import adminAvather from "../../assets/images/admin.jpg";
 import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
 import AdminMenuItems from "../../dashboard/admin/AdminMenuItems";
+import useRole from "../../hooks/useRole";
 
 const Sidebar = ({ isOpen, setIsOpen }) => {
   const { logOut } = useAuth();
@@ -21,6 +22,9 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
         toast.error("Error logging out. Please try again.");
       });
   };
+  const [ userData ]= useRole()
+  console.log(userData?.status);
+  
 
   return (
     <div className=" bg-white overflow-hidden">
@@ -33,8 +37,10 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
               : "p-3 text-center flex justify-between items-center  transition-all duration-300"
           } border-b border-dashBorder sticky top-0 bg-white`}
         >
+            <Link to={'/'}>
           <div className="flex gap-2 items-center">
-            <img className="w-12" src={dashboardLogo} alt="" />
+              <img className="w-12" src={dashboardLogo} alt="" />
+            
             <div className="flex-1">
               <span
                 className={`${
@@ -45,6 +51,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
               </span>
             </div>
           </div>
+          </Link>
           <div className="block md:hidden z-50">
             <RxCross2
               onClick={() => setIsOpen(!isOpen)}
@@ -64,9 +71,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
         <Link
           to={"profile"}
           className={`${
-            isOpen
-              ? " flex items-center py-3 px-6 gap-4"
-              : " p-2 flex gap-5"
+            isOpen ? " flex items-center py-3 px-6 gap-4" : " p-2 flex gap-5"
           } border-t border-dashBorder mt-auto sticky bottom-0  bg-white `}
         >
           <div>

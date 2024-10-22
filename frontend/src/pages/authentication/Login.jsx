@@ -52,7 +52,7 @@ const Login = () => {
                 placeholder="Enter your Email"
                 required
                 name="email"
-                defaultValue='fardin@gmail.com'
+                defaultValue='contactfardin22@gmail.com'
                 className="border border-[#ced4da]  w-full px-3 py-3 focus:border-primary transition-all duration-300 rounded-sm outline-none text-lg font-normal"
               />
             </div>
@@ -69,7 +69,7 @@ const Login = () => {
                   type={showPassword ? "text" : "password"}
                   placeholder="Enter your Password"
                   required
-                  defaultValue='asdf12345'
+                  defaultValue='Ontorfardin2020@'
                   name="password"
                   className="border border-[#ced4da]  w-full px-3 py-3 focus:border-primary transition-all duration-300 rounded-sm outline-none text-lg font-normal"
                 />

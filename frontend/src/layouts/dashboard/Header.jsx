@@ -7,9 +7,10 @@ import { IoSettingsOutline } from "react-icons/io5";
 import { PiSignOut } from "react-icons/pi";
 import { IoIosArrowDown } from "react-icons/io";
 import adminAvather from "../../assets/images/admin.jpg";
-import { HiXMark } from "react-icons/hi2";
 import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
+import useRole from "../../hooks/useRole";
+import Loader from '../../components/shared/Loader'
 
 const Header = ({ isOpen, setIsOpen }) => {
   const { logOut } = useAuth();
@@ -18,6 +19,7 @@ const Header = ({ isOpen, setIsOpen }) => {
   const month = date.toLocaleDateString("default", { month: "long" });
   const day = date.getDate();
   const navitage = useNavigate();
+  const [ userData, isLoading ]= useRole()
 
   const handleSignOut = () => {
     logOut()
@@ -62,10 +64,14 @@ const Header = ({ isOpen, setIsOpen }) => {
                       />
                       <div className="hidden sm:flex flex-col justify-center">
                         <span className="text-base lg:text-lg font-normal text-primary text-center">
-                          Admin
+                          {
+                            isLoading ? <Loader/> : userData?.role
+                          }
                         </span>
                         <h2 className="flex items-center gap-2 text-base lg:text-lg font-semibold">
-                          Fardin Ahmed <IoIosArrowDown />
+                         {
+                           `${userData?.firstName} ${userData?.lastName}`
+                         } <IoIosArrowDown />
                         </h2>
                       </div>
                     </div>

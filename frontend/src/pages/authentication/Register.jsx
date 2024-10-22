@@ -5,24 +5,24 @@ import { IoMdEyeOff } from "react-icons/io";
 import { FaRegEye } from "react-icons/fa";
 import { Country, State, City } from "country-state-city";
 import useAuth from "../../hooks/useAuth";
-import toast from 'react-hot-toast'
+import toast from "react-hot-toast";
 import BtnLoader from "../../components/shared/BtnLoader";
 import axios from "axios";
 
 const Register = () => {
-  const { createUser, loading, setLoading } = useAuth()
+  const { createUser, loading, setLoading, uploadUserProfile } = useAuth();
   const [errorMessage, setErrorMessage] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPass, setConfirmPass] = useState(false);
   const [countryName, setCountry] = useState(Country.getAllCountries()[0]);
   const [stateData, setStateData] = useState(["select"]);
-  const navigation = useNavigate()
+  const navigation = useNavigate();
 
   const countrySelector = (e) => {
-    const [isoCode, name] = e.target.value.split(':'); 
+    const [isoCode, name] = e.target.value.split(":");
     setCountry({
       name,
-      isoCode
+      isoCode,
     });
   };
 
@@ -30,8 +30,7 @@ const Register = () => {
     setStateData(State.getStatesOfCountry(countryName.isoCode));
   }, [countryName]);
 
-  
-  const registerHandle = async(e) => {
+  const registerHandle = async (e) => {
     e.preventDefault();
     const form = e.target;
 
@@ -45,14 +44,14 @@ const Register = () => {
     const postCode = form.postCode.value;
     const password = form.password.value;
     const conPassword = form.conPassword.value;
-    const role = 'customer';
+    const role = "customer";
     const notifications = {
-      "email": true,
-      "sms": false
+      email: true,
+      sms: false,
     };
     const status = "active";
-    const createdAt= new Date();
-    const updatedAt= new Date();
+    const createdAt = new Date();
+    const updatedAt = new Date();
 
     const validation = {
       capital: /[A-Z]/,
@@ -63,7 +62,7 @@ const Register = () => {
 
     if (password !== conPassword) {
       setErrorMessage("Passwords do not match");
-      return
+      return;
     } else if (password.length < 6) {
       setErrorMessage("password must be at least 6 characters long.");
       return;
@@ -76,10 +75,10 @@ const Register = () => {
     } else if (!validation.number.test(password)) {
       setErrorMessage("At least one Number");
       return;
-    } else if( !email ){
-      return setErrorMessage('Email is required')
+    } else if (!email) {
+      return setErrorMessage("Email is required");
     }
-  
+
     const registerInfo = {
       firstName,
       lastName,
@@ -94,39 +93,36 @@ const Register = () => {
       notifications,
       status,
       createdAt,
-      updatedAt
+      updatedAt,
     };
+    const fullName = `${firstName} ${lastName}`;
 
-    try{
-      createUser( email, password )
-      .then( async(success)=>{
-        toast.success('Registration successful! Welcome to Furnito');
-
-       await axios.put( `${import.meta.env.VITE_API_URL}/user`,registerInfo)
-      
-        navigation('/dashboard')
-       
-
-        
-      })
-      .catch( error => {
-        const message = error.message.slice(22,42);
-        toast.error(`Registration failed. ${ message  }`);
-        setLoading(false);
-      } )
-    } 
-    catch{
-      toast.error('An unexpected error occurred. Please try again later.')
+    try {
+      createUser(email, password)
+        .then(async (success) => {
+          await axios
+            .put(`${import.meta.env.VITE_API_URL}/user`, registerInfo)
+            .then((success) => {
+              uploadUserProfile(fullName)
+                .then((res) => {
+                  toast.success("Registration successful! Welcome to Furnito");
+                  navigation("/dashboard")
+                })
+            });
+        })
+        .catch((error) => {
+          const message = error.message.slice(22, 42);
+          toast.error(`Registration failed. ${message}`);
+          setLoading(false);
+        });
+    } catch {
+      toast.error("An unexpected error occurred. Please try again later.");
     }
-
-
-    
   };
   return (
     <div>
       <PageHeader page="User Register" />
       <div className="mt-10 mx-3">
-       
         <div className="md:max-w-xl  lg:max-w-2xl mx-auto">
           <h2 className="text-3xl font-medium mb-5">Sign Up</h2>
 
@@ -144,7 +140,6 @@ const Register = () => {
                   type="text"
                   placeholder="Enter your First Name"
                   name="first"
-                  
                   className="border border-[#ced4da]  w-full px-3 py-3 focus:border-primary transition-all duration-300 rounded-sm outline-none text-lg font-normal"
                 />
               </div>
@@ -160,7 +155,6 @@ const Register = () => {
                   type="text"
                   placeholder="Enter your Last Name"
                   name="last"
-                  
                   className="border border-[#ced4da]  w-full px-3 py-3 focus:border-primary transition-all duration-300 rounded-sm outline-none text-lg font-normal"
                 />
               </div>
@@ -178,7 +172,6 @@ const Register = () => {
                 type="email"
                 placeholder="Enter your Email"
                 name="email"
-                
                 className="border border-[#ced4da]  w-full px-3 py-3 focus:border-primary transition-all duration-300 rounded-sm outline-none text-lg font-normal"
               />
             </div>
@@ -195,7 +188,6 @@ const Register = () => {
                 type="number"
                 placeholder="Enter your Number"
                 name="phoneNumber"
-                
                 className="border border-[#ced4da]  w-full px-3 py-3 focus:border-primary transition-all duration-300 rounded-sm outline-none text-lg font-normal"
               />
             </div>
@@ -215,7 +207,10 @@ const Register = () => {
                   className="border border-[#ced4da]  w-full px-3 py-3 focus:border-primary transition-all duration-300 rounded-sm outline-none text-lg font-normal"
                 >
                   {Country.getAllCountries().map((country, index) => (
-                    <option key={index}  value={`${country.isoCode}:${country.name}`}>
+                    <option
+                      key={index}
+                      value={`${country.isoCode}:${country.name}`}
+                    >
                       {country.name}
                     </option>
                   ))}
@@ -284,11 +279,11 @@ const Register = () => {
                     type={showPassword ? "text" : "password"}
                     placeholder="Enter your Password"
                     name="password"
-                    defaultValue={'Ontorfardin2020@'}
+                    defaultValue={"Ontorfardin2020@"}
                     className="border border-[#ced4da]  w-full px-3 py-3 focus:border-primary transition-all duration-300 rounded-sm outline-none text-lg font-normal"
                   />
                   <span onClick={() => setShowPassword(!showPassword)}>
-                    { showPassword ? (
+                    {showPassword ? (
                       <IoMdEyeOff className="text-2xl text-neutral-500 absolute top-3 right-3" />
                     ) : (
                       <FaRegEye className="text-2xl text-neutral-500 absolute top-3 right-3" />
@@ -307,7 +302,7 @@ const Register = () => {
                   <input
                     type={showConfirmPass ? "text" : "password"}
                     placeholder="Enter Confirmed Password"
-                    defaultValue={'Ontorfardin2020@'}
+                    defaultValue={"Ontorfardin2020@"}
                     name="conPassword"
                     className="border border-[#ced4da]  w-full px-3 py-3 focus:border-primary transition-all duration-300 rounded-sm outline-none text-lg font-normal"
                   />
@@ -327,10 +322,13 @@ const Register = () => {
 
             {/* Submit Button */}
             <div className="mt-5">
-              <button 
-              type="submit"
-              className="text-lg text-center flex justify-center w-full font-normal hover:text-white hover:bg-primary border  outline-none hover:border-primary  rounded-sm hover:rounded-sm py-3 transition-all duration-300 text-white cursor-pointer bg-primary"
-              > { !loading ? 'Sign Up'  : <BtnLoader/> }</button>
+              <button
+                type="submit"
+                className="text-lg text-center flex justify-center w-full font-normal hover:text-white hover:bg-primary border  outline-none hover:border-primary  rounded-sm hover:rounded-sm py-3 transition-all duration-300 text-white cursor-pointer bg-primary"
+              >
+                {" "}
+                {!loading ? "Sign Up" : <BtnLoader />}
+              </button>
             </div>
             <div className="mt-3">
               <h1 className="text-base font-normal text-heading">

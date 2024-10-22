@@ -57,7 +57,7 @@ async function run() {
       const isExist = await usersCollection.findOne({ email: user?.email });
       if (isExist) return res.send(isExist);
 
-      const options = { upsert: true }; 
+      const options = { upsert: true };
       const query = { email: user?.email };
       const updateDoc = {
         $set: {
@@ -67,6 +67,13 @@ async function run() {
       const result = await usersCollection.updateOne(query, updateDoc, options);
       res.send(result);
     });
+
+    // Get User data using email address
+    app.get('/user/:email', async(req, res)=>{
+      const email = req.params.email;
+      const result = await usersCollection.findOne( { email }  )
+      res.send(result)
+    } )
 
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
