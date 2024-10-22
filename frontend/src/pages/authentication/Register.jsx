@@ -20,7 +20,7 @@ const Register = () => {
 
   const countrySelector = (e) => {
     const [isoCode, name] = e.target.value.split(":");
-    setCountry({
+    setCountry({ 
       name,
       isoCode,
     });
