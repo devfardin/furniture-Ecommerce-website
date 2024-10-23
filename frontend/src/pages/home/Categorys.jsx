@@ -74,7 +74,7 @@ const Categorys = () => {
             className="mySwiper"
           >
             {categorys.map((category, index) => (
-              <SwiperSlide>
+              <SwiperSlide key={index}>
                 <div className="border border-[rgba(221, 221, 221, 0.5)] px-2 py-6">
                   <img src={category.image} className="w-full" alt="" />
                   <h2 className="text-xl font-medium text-heading mt-4 mb-2 text-center">

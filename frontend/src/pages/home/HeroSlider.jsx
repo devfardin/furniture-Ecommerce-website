@@ -39,7 +39,7 @@ const HeroSlider = () => {
      <Container>
      <Swiper navigation={true}  modules={[Navigation]} className="mySwiper">
       {
-        carousel.map((items, index)=><SwiperSlide>
+        carousel.map((items, index)=><SwiperSlide key={index}>
           <div className='py-20 px-10  md:px-20 lg:px-28 flex flex-col-reverse lg:flex-row gap-10 items-center justify-between '>
           <div>
           <h1 className='text-4xl md:text-5xl lg:text-6xl cursor-pointer w-full lg:max-w-lg mb-5 lg:leading-[74px] font-semibold hover:text-primary text-heading'>{items.title}</h1>

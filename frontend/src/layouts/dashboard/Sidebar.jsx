@@ -9,8 +9,12 @@ import AdminMenuItems from "../../dashboard/admin/AdminMenuItems";
 import useRole from "../../hooks/useRole";
 
 const Sidebar = ({ isOpen, setIsOpen }) => {
-  const { logOut } = useAuth();
+  const { logOut, user } = useAuth();
   const navitage = useNavigate();
+  const [userData] = useRole();
+  const userRole =  userData?.role
+  console.log(userRole);
+  
 
   const handleSignOut = () => {
     logOut()
@@ -22,9 +26,6 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
         toast.error("Error logging out. Please try again.");
       });
   };
-  const [ userData ]= useRole()
-  console.log(userData?.status);
-  
 
   return (
     <div className=" bg-white overflow-hidden">
@@ -37,20 +38,20 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
               : "p-3 text-center flex justify-between items-center  transition-all duration-300"
           } border-b border-dashBorder sticky top-0 bg-white`}
         >
-            <Link to={'/'}>
-          <div className="flex gap-2 items-center">
+          <Link to={"/"}>
+            <div className="flex gap-2 items-center">
               <img className="w-12" src={dashboardLogo} alt="" />
-            
-            <div className="flex-1">
-              <span
-                className={`${
-                  isOpen ? "" : "md:hidden"
-                } text-3xl text-left  font-semibold`}
-              >
-                Furnito
-              </span>
+
+              <div className="flex-1">
+                <span
+                  className={`${
+                    isOpen ? "" : "md:hidden"
+                  } text-3xl text-left  font-semibold`}
+                >
+                  Furnito
+                </span>
+              </div>
             </div>
-          </div>
           </Link>
           <div className="block md:hidden z-50">
             <RxCross2
@@ -62,7 +63,9 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
         {/* Sidebar logo and Title end */}
 
         {/* Sidebar Menu Items Start */}
-        <div className="">
+        <div>
+
+
           <AdminMenuItems isOpen={isOpen} />
         </div>
         {/* Sidebar Menu Items Start */}
@@ -90,7 +93,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
           >
             {/* User Name */}
             <h3 className="text-base font-medium text-[#260944] hover:text-primary transition-all duration-300 cursor-pointer">
-              Fardin Ahmed
+              {user?.displayName}
             </h3>
             <button
               onClick={handleSignOut}

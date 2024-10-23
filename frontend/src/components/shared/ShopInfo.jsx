@@ -1,6 +1,5 @@
 import React from 'react'
 import { BsTruck } from "react-icons/bs";
-import { LiaRetweetSolid } from "react-icons/lia";
 import { RxLockClosed } from "react-icons/rx";
 import { BsGift } from "react-icons/bs";
 import { LiaRedoAltSolid } from "react-icons/lia";
@@ -32,7 +31,7 @@ const ShopInfo = () => {
     <Container>
        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 justify-between items-center gap-7 mt-16'>
        {
-            shopInfo.map((info, index)=> <div className='border border-[#e9ecef] flex items-center justify-center gap-4 px-5 py-10'>
+            shopInfo.map((info, index)=> <div key={index} className='border border-[#e9ecef] flex items-center justify-center gap-4 px-5 py-10'>
                 <info.icon className='text-4xl text-primary'/>
                 <div>
                 <h1 className='text-2xl font-normal text-heading'>{info.title}</h1>

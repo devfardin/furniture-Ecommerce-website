@@ -49,7 +49,7 @@ const OurStore = () => {
             : <div>
               <div className='flex justify-center overflow-x-auto items-center gap-8'>
                 {
-                  categorys.map((category, index) => <div onClick={() => handleFilter(category.category)}>
+                  categorys.map((category, index) => <div key={index} onClick={() => handleFilter(category.category)}>
                     <h1 className={`text-base font-medium cursor-pointer text-heading hover:text-primary transition-all duration-300 border-b pb-3 hover:border-primary ${categoryName== category?.category?'text-primary  border-b border-primary':'text-heading border-transparent'}`}>{category?.category}</h1>
                   </div>)
                 }

@@ -13,7 +13,7 @@ import useRole from "../../hooks/useRole";
 import Loader from '../../components/shared/Loader'
 
 const Header = ({ isOpen, setIsOpen }) => {
-  const { logOut } = useAuth();
+  const { logOut, user } = useAuth();
   const date = new Date();
   const year = date.getFullYear();
   const month = date.toLocaleDateString("default", { month: "long" });
@@ -70,7 +70,7 @@ const Header = ({ isOpen, setIsOpen }) => {
                         </span>
                         <h2 className="flex items-center gap-2 text-base lg:text-lg font-semibold">
                          {
-                           `${userData?.firstName} ${userData?.lastName}`
+                           user?.displayName
                          } <IoIosArrowDown />
                         </h2>
                       </div>

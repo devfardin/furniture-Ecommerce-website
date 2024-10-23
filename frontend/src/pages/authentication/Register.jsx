@@ -8,27 +8,24 @@ import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
 import BtnLoader from "../../components/shared/BtnLoader";
 import axios from "axios";
+import Uploaded from "../../components/shared/Upload";
+import UploadCrop from "../../components/shared/UploadCrop";
 
 const Register = () => {
   const { createUser, loading, setLoading, uploadUserProfile } = useAuth();
   const [errorMessage, setErrorMessage] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPass, setConfirmPass] = useState(false);
-  const [countryName, setCountry] = useState(Country.getAllCountries()[0]);
-  const [stateData, setStateData] = useState(["select"]);
   const navigation = useNavigate();
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [imageUrl, setImageUrl] = useState("");
 
-  const countrySelector = (e) => {
-    const [isoCode, name] = e.target.value.split(":");
-    setCountry({ 
-      name,
-      isoCode,
-    });
+  const handleFileChange = (e) => {
+    setSelectedFile(e.target.files[0]);
+    setImageUrl(URL.createObjectURL(e.target.files[0]));
   };
-
-  useEffect(() => {
-    setStateData(State.getStatesOfCountry(countryName.isoCode));
-  }, [countryName]);
+  console.log(selectedFile);
+  console.log(imageUrl);
 
   const registerHandle = async (e) => {
     e.preventDefault();
@@ -36,12 +33,7 @@ const Register = () => {
 
     const firstName = form.first.value;
     const lastName = form.last.value;
-    const phone = form.phoneNumber.value;
     const email = form.email.value;
-    const country = countryName.name;
-    const state = form.state.value;
-    const city = form.city.value;
-    const postCode = form.postCode.value;
     const password = form.password.value;
     const conPassword = form.conPassword.value;
     const role = "customer";
@@ -82,12 +74,7 @@ const Register = () => {
     const registerInfo = {
       firstName,
       lastName,
-      phone,
       email,
-      country,
-      state,
-      city,
-      postCode,
       password,
       role,
       notifications,
@@ -103,11 +90,10 @@ const Register = () => {
           await axios
             .put(`${import.meta.env.VITE_API_URL}/user`, registerInfo)
             .then((success) => {
-              uploadUserProfile(fullName)
-                .then((res) => {
-                  toast.success("Registration successful! Welcome to Furnito");
-                  navigation("/dashboard")
-                })
+              uploadUserProfile(fullName).then((res) => {
+                toast.success("Registration successful! Welcome to Furnito");
+                navigation("/dashboard");
+              });
             });
         })
         .catch((error) => {
@@ -119,6 +105,7 @@ const Register = () => {
       toast.error("An unexpected error occurred. Please try again later.");
     }
   };
+
   return (
     <div>
       <PageHeader page="User Register" />
@@ -161,110 +148,30 @@ const Register = () => {
             </div>
 
             {/* User Email Address */}
+
             <div className="mt-5">
-              <label
-                htmlFor="userName"
-                className="flex items-center gap-3 text-base font-normal text-heading mb-2 pl-1"
-              >
-                Email Address<span className="text-red-500">*</span>
-              </label>
-              <input
-                type="email"
-                placeholder="Enter your Email"
-                name="email"
-                className="border border-[#ced4da]  w-full px-3 py-3 focus:border-primary transition-all duration-300 rounded-sm outline-none text-lg font-normal"
-              />
-            </div>
-
-            {/* User Phone Number */}
-            <div className="mt-5">
-              <label
-                htmlFor="userName"
-                className="flex items-center gap-3 text-base font-normal text-heading mb-2 pl-1"
-              >
-                Phone Number<span className="text-red-500">*</span>
-              </label>
-              <input
-                type="number"
-                placeholder="Enter your Number"
-                name="phoneNumber"
-                className="border border-[#ced4da]  w-full px-3 py-3 focus:border-primary transition-all duration-300 rounded-sm outline-none text-lg font-normal"
-              />
-            </div>
-
-            {/* User Address */}
-            <div className="mt-5 flex flex-col md:flex-row gap-3 items-center justify-between">
-              <div className="w-full md:flex-1">
+              <div className="w-full  md:flex-1">
                 <label
                   htmlFor="userName"
                   className="flex items-center gap-3 text-base font-normal text-heading mb-2 pl-1"
                 >
-                  Country
-                </label>
-                <select
-                  onChange={countrySelector}
-                  name="country"
-                  className="border border-[#ced4da]  w-full px-3 py-3 focus:border-primary transition-all duration-300 rounded-sm outline-none text-lg font-normal"
-                >
-                  {Country.getAllCountries().map((country, index) => (
-                    <option
-                      key={index}
-                      value={`${country.isoCode}:${country.name}`}
-                    >
-                      {country.name}
-                    </option>
-                  ))}
-                </select>
-              </div>
-              <div className="w-full md:flex-1">
-                <label
-                  htmlFor="userName"
-                  className="flex items-center gap-3 text-base font-normal text-heading mb-2 pl-1"
-                >
-                  State
-                </label>
-                <select
-                  name="state"
-                  className="border border-[#ced4da]  w-full px-3 py-3 focus:border-primary transition-all duration-300 rounded-sm outline-none text-lg font-normal"
-                >
-                  {stateData?.map((state, index) => (
-                    <option key={index}> {state?.name} </option>
-                  ))}
-                </select>
-              </div>
-            </div>
-
-            <div className="mt-5 flex flex-col md:flex-row gap-3 items-center justify-between">
-              <div className="w-full md:flex-1">
-                <label
-                  htmlFor="userName"
-                  className="flex items-center gap-3 text-base font-normal text-heading mb-2 pl-1"
-                >
-                  City
+                  Email Address<span className="text-red-500">*</span>
                 </label>
                 <input
-                  type="text"
-                  placeholder="Enter your City"
-                  name="city"
-                  className="border border-[#ced4da]  w-full px-3 py-3 focus:border-primary transition-all duration-300 rounded-sm outline-none text-lg font-normal"
-                />
-              </div>
-              <div className="w-full md:flex-1">
-                <label
-                  htmlFor="userName"
-                  className="flex items-center gap-3 text-base font-normal text-heading mb-2 pl-1"
-                >
-                  Post Code
-                </label>
-                <input
-                  type="text"
-                  placeholder="Enter your Zip Code"
-                  name="postCode"
+                  type="email"
+                  placeholder="Enter your Email"
+                  name="email"
                   className="border border-[#ced4da]  w-full px-3 py-3 focus:border-primary transition-all duration-300 rounded-sm outline-none text-lg font-normal"
                 />
               </div>
             </div>
-            {/* Account password */}
+
+            <div className="mt-5">
+              <Uploaded />
+            </div>
+            <div className="mt-5">
+              <UploadCrop />
+            </div>
 
             <div className="mt-5 flex flex-col md:flex-row gap-3 items-center justify-between">
               <div className="w-full  md:flex-1">
