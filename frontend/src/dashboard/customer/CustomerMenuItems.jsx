@@ -35,7 +35,7 @@ const CustomerMenuItems = ({ isOpen }) => {
       icon: FiHeart,
     },
     {
-      label: "return-request",
+      label: "Return Requests",
       link: "return-request",
       icon: RiInboxUnarchiveLine,
     },
