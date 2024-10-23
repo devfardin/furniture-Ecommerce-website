@@ -86,7 +86,7 @@ const AdminMenuItems = ({ isOpen }) => {
 
   ]
   return (
-    <div className="flex justify-self-start flex-col gap-3">
+    <div className="flex w-full justify-self-start flex-col gap-3">
       {
         adminMenuLinks.map( (adminLink, index)=> <SidebarLink key={index} to={adminLink.link} label={adminLink.label} icon={adminLink.icon} isOpen={isOpen}/> )
       }

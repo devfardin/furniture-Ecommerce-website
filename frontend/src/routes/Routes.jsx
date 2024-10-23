@@ -28,6 +28,11 @@ import UserManage from "../dashboard/admin/pages/UserManage.jsx";
 import Posts from "../dashboard/admin/pages/Posts.jsx";
 import PostCategories from "../dashboard/admin/pages/PostCategories.jsx";
 import Notification from "../dashboard/admin/pages/Notification.jsx";
+import CustomerDashboard from "../dashboard/customer/pages/CustomerDashboard.jsx";
+import MyOrders from "../dashboard/customer/pages/MyOrders.jsx";
+import MyCart from "../dashboard/customer/pages/MyCart.jsx";
+import MyWishlist from "../dashboard/customer/pages/MyWishlist.jsx";
+import ReturnRequests from "../dashboard/customer/pages/ReturnRequests.jsx";
 
 const router = createBrowserRouter([
   {
@@ -148,7 +153,30 @@ const router = createBrowserRouter([
         path: 'notification',
         element: <Notification/>
       },
+
+      // Customer Routes
+      {
+        path:'user',
+        element:<CustomerDashboard/>
+      },
+      {
+        path:'my-orders',
+        element:<MyOrders/>
+      },
+      {
+        path:'my-cart',
+        element:<MyCart/>
+      },
+      {
+        path:'my-wishlist',
+        element:<MyWishlist/>
+      },
+      {
+        path:'return-request',
+        element:<ReturnRequests/>
+      },
     ]
-  }
+  },
+  
 ]);
 export default router

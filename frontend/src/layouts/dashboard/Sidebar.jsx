@@ -7,14 +7,13 @@ import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
 import AdminMenuItems from "../../dashboard/admin/AdminMenuItems";
 import useRole from "../../hooks/useRole";
+import CustomerMenuItems from "../../dashboard/customer/CustomerMenuItems";
 
 const Sidebar = ({ isOpen, setIsOpen }) => {
   const { logOut, user } = useAuth();
   const navitage = useNavigate();
   const [userData] = useRole();
-  const userRole =  userData?.role
-  console.log(userRole);
-  
+  const userRole = userData?.role;
 
   const handleSignOut = () => {
     logOut()
@@ -63,10 +62,15 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
         {/* Sidebar logo and Title end */}
 
         {/* Sidebar Menu Items Start */}
-        <div>
+        <div className="mx-2">
 
+          {
+            userRole === 'customer' && <CustomerMenuItems isOpen={isOpen}/>
+          }
 
-          <AdminMenuItems isOpen={isOpen} />
+          { userRole === "admin" &&
+            <AdminMenuItems isOpen={isOpen} />
+           }
         </div>
         {/* Sidebar Menu Items Start */}
 
@@ -80,7 +84,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
           <div>
             <img
               className="w-[55px] h-[55px] object-cover rounded-full"
-              src={ user.photoURL ? user.photoURL : adminAvather }
+              src={user?.photoURL ? user?.photoURL : adminAvather}
               alt="User Profile"
             />
           </div>

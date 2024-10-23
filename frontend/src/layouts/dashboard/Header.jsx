@@ -10,7 +10,7 @@ import adminAvather from "../../assets/images/admin.jpg";
 import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
 import useRole from "../../hooks/useRole";
-import Loader from '../../components/shared/Loader'
+import Loader from "../../components/shared/Loader";
 
 const Header = ({ isOpen, setIsOpen }) => {
   const { logOut, user } = useAuth();
@@ -19,7 +19,7 @@ const Header = ({ isOpen, setIsOpen }) => {
   const month = date.toLocaleDateString("default", { month: "long" });
   const day = date.getDate();
   const navitage = useNavigate();
-  const [ userData, isLoading ]= useRole()
+  const [userData, isLoading] = useRole();
 
   const handleSignOut = () => {
     logOut()
@@ -59,19 +59,15 @@ const Header = ({ isOpen, setIsOpen }) => {
                     <div class="flex gap-2 sm:gap-4 items-center">
                       <img
                         className="w-14 h-14 rounded-full"
-                        src={adminAvather}
+                        src={user?.photoURL ? user?.photoURL : adminAvather}
                         alt=""
                       />
                       <div className="hidden sm:flex flex-col justify-center">
                         <span className="text-base lg:text-lg font-normal text-primary text-center">
-                          {
-                            isLoading ? <Loader/> : userData?.role
-                          }
+                          {isLoading ? <Loader /> : userData?.role}
                         </span>
                         <h2 className="flex items-center gap-2 text-base lg:text-lg font-semibold">
-                         {
-                           user?.displayName
-                         } <IoIosArrowDown />
+                          {user?.displayName} <IoIosArrowDown />
                         </h2>
                       </div>
                     </div>
