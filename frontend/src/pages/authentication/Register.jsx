@@ -9,7 +9,7 @@ import toast from "react-hot-toast";
 import BtnLoader from "../../components/shared/BtnLoader";
 import axios from "axios";
 import Uploaded from "../../components/shared/Upload";
-import UploadCrop from "../../components/shared/UploadCrop";
+import { mediaUpload } from "../../apis/MediaUpload";
 
 const Register = () => {
   const { createUser, loading, setLoading, uploadUserProfile } = useAuth();
@@ -17,20 +17,13 @@ const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPass, setConfirmPass] = useState(false);
   const navigation = useNavigate();
-  const [selectedFile, setSelectedFile] = useState(null);
-  const [imageUrl, setImageUrl] = useState("");
 
-  const handleFileChange = (e) => {
-    setSelectedFile(e.target.files[0]);
-    setImageUrl(URL.createObjectURL(e.target.files[0]));
-  };
-  console.log(selectedFile);
-  console.log(imageUrl);
+  const [imageUrl, setImageUrl] = useState("");
+  // console.log(imageUrl);
 
   const registerHandle = async (e) => {
     e.preventDefault();
     const form = e.target;
-
     const firstName = form.first.value;
     const lastName = form.last.value;
     const email = form.email.value;
@@ -83,22 +76,32 @@ const Register = () => {
       updatedAt,
     };
     const fullName = `${firstName} ${lastName}`;
-
+    // toast.success("Registration successful! Welcome to Furnito");
     try {
       createUser(email, password)
         .then(async (success) => {
-          await axios
-            .put(`${import.meta.env.VITE_API_URL}/user`, registerInfo)
+          setLoading(true)
+          await mediaUpload(imageUrl)
+            .then( async(res) => {
+              const profile = res.data.display_url;
+              await uploadUserProfile( fullName, profile )
+              .then( async(res)=>{
+                setLoading(true)
+                await axios.put(`${import.meta.env.VITE_API_URL}/user`, {...registerInfo, profile })
             .then((success) => {
-              uploadUserProfile(fullName).then((res) => {
-                toast.success("Registration successful! Welcome to Furnito");
-                navigation("/dashboard");
-              });
+              toast.success("Registration successful! Welcome to Furnito");
+              navigation('/dashboard')
+              setLoading(false);
+            });
+              } )
+            })
+            .catch((error) => {
+              console.log(error);
             });
         })
         .catch((error) => {
           const message = error.message.slice(22, 42);
-          toast.error(`Registration failed. ${message}`);
+          toast.error(`Registration failed. ${error}`);
           setLoading(false);
         });
     } catch {
@@ -167,10 +170,7 @@ const Register = () => {
             </div>
 
             <div className="mt-5">
-              <Uploaded />
-            </div>
-            <div className="mt-5">
-              <UploadCrop />
+              <Uploaded setImageUrl={setImageUrl} imageUrl={imageUrl} />
             </div>
 
             <div className="mt-5 flex flex-col md:flex-row gap-3 items-center justify-between">

@@ -80,7 +80,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
           <div>
             <img
               className="w-[55px] h-[55px] object-cover rounded-full"
-              src={adminAvather}
+              src={ user.photoURL ? user.photoURL : adminAvather }
               alt="User Profile"
             />
           </div>
