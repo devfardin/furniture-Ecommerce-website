@@ -12,7 +12,7 @@ import Uploaded from "../../components/shared/Upload";
 import { mediaUpload } from "../../apis/MediaUpload";
 
 const Register = () => {
-  const { createUser, loading, setLoading, uploadUserProfile } = useAuth();
+  const { createUser, loading, setLoading, uploadUserProfile, user } = useAuth();
   const [errorMessage, setErrorMessage] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPass, setConfirmPass] = useState(false);
@@ -108,7 +108,7 @@ const Register = () => {
       toast.error("An unexpected error occurred. Please try again later.");
     }
   };
-
+  if( user ) return navigation('/dashboard')
   return (
     <div>
       <PageHeader page="User Register" />

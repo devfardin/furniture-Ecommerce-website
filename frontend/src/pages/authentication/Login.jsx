@@ -9,8 +9,8 @@ import BtnLoader from "../../components/shared/BtnLoader";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const { loginUser, loading, setLoading } = useAuth();
-  const navagation = useNavigate()
+  const { loginUser, loading, setLoading, user } = useAuth();
+  const navigation = useNavigate()
 
   const handleLoginSubmit = (e) => {
     e.preventDefault();
@@ -22,7 +22,7 @@ const Login = () => {
         .then( success => {
             toast.success('Login Success')
             form.reset();
-            navagation('/dashboard');
+            navigation('/dashboard');
             return
         } )
         .catch( error => {
@@ -33,6 +33,7 @@ const Login = () => {
     
   };
 
+  if( user ) return navigation('/dashboard')
   return (
     <div>
       <PageHeader page="User Login" />
@@ -52,7 +53,7 @@ const Login = () => {
                 placeholder="Enter your Email"
                 required
                 name="email"
-                defaultValue='contactfardin22@gmail.com'
+                defaultValue='fardin@gmail.com'
                 className="border border-[#ced4da]  w-full px-3 py-3 focus:border-primary transition-all duration-300 rounded-sm outline-none text-lg font-normal"
               />
             </div>

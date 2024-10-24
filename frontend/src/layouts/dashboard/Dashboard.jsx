@@ -22,10 +22,16 @@ const Dashboard = () => {
       {/* End Side bar Area */}
 
       {/* Start Header Area */}
-      <div className="flex-1 sm:ml-0 mx-3 ">
+      <div className="flex-1 flex flex-col  sm:ml-0 mx-3 ">
+        <div>
         <Header isOpen={isOpen} setIsOpen={setIsOpen}/>
+        </div>
+        
         <Outlet/>
+
+        <div className="mt-auto">
         <Footer/>
+        </div>
       </div>
       {/* End Header Area */}
     </div>

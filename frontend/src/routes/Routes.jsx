@@ -33,6 +33,7 @@ import MyOrders from "../dashboard/customer/pages/MyOrders.jsx";
 import MyCart from "../dashboard/customer/pages/MyCart.jsx";
 import MyWishlist from "../dashboard/customer/pages/MyWishlist.jsx";
 import ReturnRequests from "../dashboard/customer/pages/ReturnRequests.jsx";
+import SupportTickets from "../dashboard/customer/pages/SupportTickets.jsx";
 
 const router = createBrowserRouter([
   {
@@ -174,6 +175,10 @@ const router = createBrowserRouter([
       {
         path:'return-request',
         element:<ReturnRequests/>
+      },
+      {
+        path:'support-tickets',
+        element:<SupportTickets/>
       },
     ]
   },

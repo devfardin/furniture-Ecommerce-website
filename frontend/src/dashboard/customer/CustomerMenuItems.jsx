@@ -6,6 +6,7 @@ import { FaHome } from "react-icons/fa";
 import { FiHeart } from "react-icons/fi";
 import { BsCartCheck } from "react-icons/bs";
 import { RiInboxUnarchiveLine } from "react-icons/ri";
+import { MdOutlineSupportAgent } from "react-icons/md";
 
 const CustomerMenuItems = ({ isOpen }) => {
   const customerMenu = [
@@ -38,6 +39,11 @@ const CustomerMenuItems = ({ isOpen }) => {
       label: "Return Requests",
       link: "return-request",
       icon: RiInboxUnarchiveLine,
+    },
+    {
+      label: "Support/Tickets",
+      link: "support-tickets",
+      icon: MdOutlineSupportAgent,
     },
   ];
   return (
