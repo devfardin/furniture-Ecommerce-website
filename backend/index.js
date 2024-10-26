@@ -93,32 +93,26 @@ async function run() {
 
     app.put("/cart", async (req, res) => {
       const productData = req.body;
-
       // come from client or user data
       const productId = productData?.productId;
       const customerEmail = productData?.customerEmail;
       const productQuan = productData?.productQuantity;
-
       // come data from database
       const queryId = { productId: productId, customerEmail: customerEmail };
       const query2 = { customerEmail: customerEmail };
       const isExistId = await cartCollection.findOne(queryId);
       const isExistEmail = await cartCollection.findOne(query2);
       const isExistDbId = isExistId?.productId;
-
       const isExistDbEmail = isExistEmail?.customerEmail;
       const dbQuantity = isExistId?.productQuantity;
-
       if (productId === isExistDbId && customerEmail === isExistDbEmail) {
         const filter = {
           productId: productId,
           customerEmail: customerEmail,
         };
-
         const options = {
           upsert: productId === isExistDbId && customerEmail === isExistDbEmail,
         };
-
         const updateDoc = {
           $set: {
             productQuantity: dbQuantity + productQuan,
@@ -140,6 +134,14 @@ async function run() {
       res.send(result);
     });
 
+    // -------------------------------------------------------------------------
+    // get delte from database
+    app.delete('/cart/:id', async(req, res)=>{
+      const id= req.params.id;
+      const query = { _id:new ObjectId(id) }
+      const result = await cartCollection.deleteOne(query);
+      res.send(result)
+    })
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
     console.log(

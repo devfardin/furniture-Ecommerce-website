@@ -16,8 +16,7 @@ import useCartData from "../hooks/useCartData";
 const Header = () => {
   const [isOpenMenu, setIsOpenMenu] = useState(false);
   const { user, logOut } = useAuth();
-  const [ refetch, isLoading, error, cart ] =useCartData()
-  console.log(cart.length);
+  const [ refetch, isLoading, error, cartItems ] =useCartData()
   
   const menuItems = [
     {
@@ -131,7 +130,7 @@ const Header = () => {
                     <div>
                       <BsCart2 className="text-xl !z-10 group-hover:text-white duration-300 transition-all" />
                       <span className="absolute duration-300 right-0 top-0.5 flex h-[20px] w-[20px] items-center justify-center rounded-full bg-primary text-center text-[11px] text-white ">
-                        { cart?.length }
+                        { cartItems?.length }
                       </span>
                     </div>
                   </div>

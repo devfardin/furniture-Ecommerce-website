@@ -10,7 +10,7 @@ const useCartData = () => {
     refetch,
     isLoading,
     error,
-    data: cart = [],
+    data: cartItems = [],
   } = useQuery({
     queryKey: ["cart-product", email],
     queryFn: async () => {
@@ -18,6 +18,6 @@ const useCartData = () => {
       return data.data;
     },
   });
-  return [refetch, isLoading, error, cart];
+  return [refetch, isLoading, error, cartItems];
 };
 export default useCartData;

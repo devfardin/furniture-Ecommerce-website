@@ -29,11 +29,11 @@ import PostCategories from "../dashboard/admin/pages/PostCategories.jsx";
 import Notification from "../dashboard/admin/pages/Notification.jsx";
 import CustomerDashboard from "../dashboard/customer/pages/CustomerDashboard.jsx";
 import MyOrders from "../dashboard/customer/pages/MyOrders.jsx";
-import MyCart from "../dashboard/customer/pages/MyCart.jsx";
 import MyWishlist from "../dashboard/customer/pages/MyWishlist.jsx";
 import ReturnRequests from "../dashboard/customer/pages/ReturnRequests.jsx";
 import SupportTickets from "../dashboard/customer/pages/SupportTickets.jsx";
 import CheckOut from "../pages/checkOut/index.jsx";
+import MyCart from "../dashboard/customer/pages/myCart/MyCart.jsx";
 
 const router = createBrowserRouter([
   {
