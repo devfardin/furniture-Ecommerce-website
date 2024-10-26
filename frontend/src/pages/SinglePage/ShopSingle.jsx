@@ -44,11 +44,7 @@ const ShopSingle = () => {
   // post user cart data in bd
   const { mutateAsync } = useMutation({
     mutationFn: async (product) => {
-      const { data } = await axiosPublic.put("/cart", {
-        ...product,
-        productQuantity,
-        customerEmail,
-      });
+      const { data } = await axiosPublic.put("/cart", product);
       return data;
     },
     onSuccess: () => {
@@ -65,8 +61,30 @@ const ShopSingle = () => {
 
   // Handle Add to cart btn
   const handleAddCart = async (product) => {
+
+    const productId= product?._id;
+    const name= product?.name;
+    const category = product?.category;
+    const discount = product?.discount;
+    const price = product?.price;
+    const featureImg = product?.featureImg;
+    const description = product?.description;
+    const sellerEmail = product?.authorEmail;
+    const productInfo = {
+      productId,
+      name,
+      category,
+      discount,
+      price,
+      featureImg,
+      description,
+      sellerEmail,
+      productQuantity,
+      customerEmail,
+    }
+
     if (user) {
-      await mutateAsync(product)
+      await mutateAsync(productInfo)
     } else {
       toast.error("To add items to your cart, please register or log in.");
     }
@@ -101,7 +119,9 @@ const ShopSingle = () => {
             </div>
             <div className="col-span-4">
               <h1 className="text-3xl font-medium text-heading mb-2">
-                {data?.name}
+                {data?.name} 
+                
+                {data?._id}
               </h1>
               <span className="bg-[#5AB27E] px-2 py-0.5 text-sm font-normal text-white">
                 New Arival

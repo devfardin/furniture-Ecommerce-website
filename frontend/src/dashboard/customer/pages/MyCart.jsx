@@ -5,9 +5,6 @@ import Loader from "../../../components/shared/Loader";
 
 const MyCart = () => {
   const [refetch, isLoading, error, cart] = useCartData();
-
-  console.log(cart);
-  
   if(isLoading){
     return <Loader/>
   } else if(cart.length < 0){
