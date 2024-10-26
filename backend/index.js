@@ -32,8 +32,11 @@ async function run() {
     const productCollection = database.collection("products");
     const usersCollection = database.collection("users");
     const cartCollection = database.collection("cart");
+    const wishListCollection = database.collection('wishlist')
 
-    // All Get Method
+    // All Get Method here 👈
+    // -------------------------
+
     app.get("/products", async (req, res) => {
       const result = await productCollection.find().toArray();
       res.send(result);
@@ -71,8 +74,17 @@ async function run() {
       res.send(result);
     });
 
-    // ----------------------------------------------------
-    // Post Data Method
+     // Get Single User data base on the email address
+     app.get("/user/:email", async (req, res) => {
+      const email = req.params.email;
+      const result = await usersCollection.findOne({ email });
+      res.send(result);
+    });
+
+    // ===============================================================
+
+    // Post or put Method Here 👈
+    // -----------------------------
 
     // Save user in bd
     app.put("/user", async (req, res) => {
@@ -91,6 +103,8 @@ async function run() {
       res.send(result);
     });
 
+    // cart Product post Method
+    // ---------------------------
     app.put("/cart", async (req, res) => {
       const productData = req.body;
       // come from client or user data
@@ -125,16 +139,33 @@ async function run() {
       res.send(result);
     });
 
-    // ----------------------------------------------------------------------
+    // Wish list Product post method
+    // -------------------------------
+    app.put('/wishlist', async(req, res)=>{
+      const wishListProduct = req.body;
+      const productId =wishListProduct?.productId;
+      const customerEmail= wishListProduct?.customerEmail;
+      
+      const query = { productId: productId, customerEmail: customerEmail };
+      const isExist = await wishListCollection.findOne(query)
+      
+      if(isExist){
+        return res.status(400).json({
+          success: false,
+          message: "The item already exists in your records.",
+        });
+      }
+      const result = await wishListCollection.insertOne(wishListProduct);
+      return res.send(result)
+      
+    })
 
-    // Get Single User data base on the email address
-    app.get("/user/:email", async (req, res) => {
-      const email = req.params.email;
-      const result = await usersCollection.findOne({ email });
-      res.send(result);
-    });
+    // =============================================================================
 
-    // -------------------------------------------------------------------------
+  
+    // All Delete Methor Here 👈
+    // -------------------------
+
     // get delte from database
     app.delete('/cart/:id', async(req, res)=>{
       const id= req.params.id;
@@ -142,6 +173,9 @@ async function run() {
       const result = await cartCollection.deleteOne(query);
       res.send(result)
     })
+
+    // ===================================================================================
+
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
     console.log(

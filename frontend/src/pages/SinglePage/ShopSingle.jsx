@@ -89,7 +89,7 @@ const ShopSingle = () => {
     }
   };
 
-  const { wishListMetateAsync }= useMutation({
+  const { mutateAsync:wishListMetateAsync }= useMutation({
     mutationKey: ['wishlist', customerEmail],
     mutationFn: async(wishList)=>{
       const { data } = await axiosPublic.put('/wishlist', wishList)
@@ -100,7 +100,8 @@ const ShopSingle = () => {
       wishlistRefetch()
     },
     onError: (error) =>{
-      toast.error('This product is already in your wishlist.')
+      toast.error(error?.response?.data?.message)
+     
     }
   })
   // Handle wishlist button action
