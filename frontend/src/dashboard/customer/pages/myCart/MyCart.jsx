@@ -1,11 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import useCartData from "../../../../hooks/useCartData";
 import LinkButton from "../../../../components/shared/LinkButton";
 import Loader from "../../../../components/shared/Loader";
 import CartTable from "./CartTable";
+import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
+import "react-super-responsive-table/dist/SuperResponsiveTableStyle.css";
+import { Link } from "react-router-dom";
+import useAxiosSecure from "../../../../hooks/useAxiosSecure";
+import { FiMinus, FiPlus } from "react-icons/fi";
 
 const MyCart = () => {
   const [refetch, isLoading, error, cartItems] = useCartData();
+
+
+
   if (isLoading) {
     return <Loader />;
   } else if (cartItems.length < 0) {
@@ -22,61 +30,64 @@ const MyCart = () => {
     <div className="grid grid-cols-1 xl:grid-cols-7 lg:gap-5 justify-between">
       {/* Cart Data Table */}
       <div className="col-span-full xl:col-span-5">
-  
-        <table class="min-w-full border border-[#F1F1F1]">
-          {/* <!-- Table Header --> */}
-          <thead class="bg-[#F1F1F1]">
-            <tr className="!py-5 flex gap-3 justify-around ">
-              <th class="py-4 text-left text-xl font-medium text-gray-500 tracking-wider">
+        
+         <Table class="min-w-full border border-[#F1F1F1]">
+          <Thead class="bg-[#F1F1F1]">
+            <Tr className="!py-5 !w-full">
+              <Th class="py-4 text-left text-xl font-medium text-gray-500 tracking-wider">
                 Product
-              </th>
-              <th class="py-4 text-left text-xl font-medium text-gray-500 tracking-wider">
+              </Th>
+              <Th class="py-4 text-left text-xl font-medium text-gray-500 tracking-wider">
                 Price
-              </th>
-              <th class="py-4 text-left text-xl font-medium text-gray-500 tracking-wider">
+              </Th>
+              <Th class="py-4 text-left text-xl font-medium text-gray-500 tracking-wider">
                 Quantity
-              </th>
-              <th class="py-4 text-left text-xl font-medium text-gray-500 tracking-wider">
+              </Th>
+              <Th class="py-4 text-left text-xl font-medium text-gray-500 tracking-wider">
                 Subtotal
-              </th>
-              <th class="py-4 text-left text-xl font-medium text-gray-500 tracking-wider">
+              </Th>
+              <Th class="py-4 text-left text-xl font-medium text-gray-500 tracking-wider">
                 Action
-              </th>
-            </tr>
-          </thead>
-          <CartTable refetch={refetch} cartItems={cartItems}/>      
-        </table>
+              </Th>
+            </Tr>
+          </Thead>
+          
+          
+           <CartTable refetch={refetch} cartItems={cartItems} />  
+         </Table>  
+
+       
       </div>
 
-     <div className="col-span-full xl:col-span-2">
-     <div className="border border-dashBorder p-10 bg-white">
-        <div className="flex flex-col gap-4">
-          <h2 className="text-2xl font-medium text-heading border-b border-dashBorder pb-4">
-            Cart Total:
-          </h2>
+      <div className="col-span-full xl:col-span-2">
+        <div className="border border-dashBorder p-10 bg-white">
+          <div className="flex flex-col gap-4">
+            <h2 className="text-2xl font-medium text-heading border-b border-dashBorder pb-4">
+              Cart Total:
+            </h2>
 
-          <h2 className="text-lg font-medium text-heading border-b border-dashBorder pb-4 flex justify-between items-center gap-5">
-            Sub Total
-            <span className="text-pera">$00</span>
-          </h2>
+            <h2 className="text-lg font-medium text-heading border-b border-dashBorder pb-4 flex justify-between items-center gap-5">
+              Sub Total
+              <span className="text-pera">$00</span>
+            </h2>
 
-          <h2 className="text-lg font-normal text-pera border-b border-dashBorder pb-4 flex justify-between items-center gap-5">
-            Tax (Incl. --%)
-            <span className="text-pera">$00</span>
-          </h2>
+            <h2 className="text-lg font-normal text-pera border-b border-dashBorder pb-4 flex justify-between items-center gap-5">
+              Tax (Incl. --%)
+              <span className="text-pera">$00</span>
+            </h2>
 
-          <h2 className="text-lg font-medium text-heading border-b border-dashBorder pb-4 flex justify-between items-center gap-5">
-            Total Amount
-            <span className="text-pera">$00</span>
-          </h2>
-          <LinkButton
-            label="Proceed to Checkout"
-            fullWidth={true}
-            link="/checkout"
-          />
+            <h2 className="text-lg font-medium text-heading border-b border-dashBorder pb-4 flex justify-between items-center gap-5">
+              Total Amount
+              <span className="text-pera">$00</span>
+            </h2>
+            <LinkButton
+              label="Proceed to Checkout"
+              fullWidth={true}
+              link="/checkout"
+            />
+          </div>
         </div>
       </div>
-     </div>
     </div>
   );
 };

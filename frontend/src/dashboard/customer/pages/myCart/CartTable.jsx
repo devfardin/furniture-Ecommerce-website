@@ -3,29 +3,34 @@ import toast from "react-hot-toast";
 import { FiMinus, FiPlus } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
+import { Tbody, Tr, Td } from "react-super-responsive-table";
+
 const CartTable = ({ refetch, cartItems }) => {
   const [productQuantity, setProductQuantity] = useState();
   const axiouSecure = useAxiosSecure();
 
   const handleCartDelete = async (id) => {
-    const result = await axiouSecure.delete(`/cart/${id}`)
-    .then( sucess=>{
-        toast.success('Item removed from your cart successfully.');
-        refetch()     
-    })
-    .catch( error=>{
-        toast.error('Oops! Something went wrong. The item could not be deleted from your cart.')        
-    } )
+    const result = await axiouSecure
+      .delete(`/cart/${id}`)
+      .then((sucess) => {
+        toast.success("Item removed from your cart successfully.");
+        refetch();
+      })
+      .catch((error) => {
+        toast.error(
+          "Oops! Something went wrong. The item could not be deleted from your cart."
+        );
+      });
   };
+  //
   return (
-    <tbody class="bg-white divide-y divide-gray-200">
-      {/* <!-- Example Row 1 --> */}
+    <Tbody class="divide-y divide-gray-200">
       {cartItems.map((cartItem) => (
-        <tr key={cartItem?._id} className="flex flex-col lg:flex-row justify-around items-center w-full overflow-hidden">
-          <td class="px-6 py-4 whitespace-nowrap">
-            <div className="flex gap-4 items-center">
+        <Tr key={cartItem._id} className="!p-5 mb-7 bg-white">
+          <Td class="px-6 py-4 whitespace-nowrap">
+            <div className="flex flex-col justify-start lg:flex-row gap-4 items-center">
               <img
-                class="w-24 h-24 rounded-lg"
+                class="w-24 h-24 text-left rounded-lg"
                 src={cartItem?.featureImg}
                 alt={cartItem?.name}
               />
@@ -36,13 +41,13 @@ const CartTable = ({ refetch, cartItems }) => {
                 {cartItem?.name}
               </Link>
             </div>
-          </td>
-          <td class="px-6 py-4 whitespace-nowrap">
+          </Td>
+          <Td class="px-6 py-4 whitespace-nowrap">
             <h2 className="text-xl font-medium text-heading">{`$${cartItem?.price.toFixed(
               2
             )}`}</h2>
-          </td>
-          <td class="px-6 py-4 whitespace-nowrap">
+          </Td>
+          <Td class="px-6 py-4 whitespace-nowrap">
             <div className="flex items-center gap-3">
               <button
                 onClick={() =>
@@ -69,25 +74,23 @@ const CartTable = ({ refetch, cartItems }) => {
                 <FiPlus className="text-xl" />
               </button>
             </div>
-          </td>
-          <td class="px-6 py-4 whitespace-nowrap">
+          </Td>
+          <Td class="px-6 py-4 whitespace-nowrap">
             <h1 className="text-xl font-medium text-heading">{`$${
               cartItem?.price * cartItem?.productQuantity
             }`}</h1>
-          </td>
-          <td class="px-6 py-4 whitespace-nowrap">
-            {/* <!-- Action buttons (e.g., edit or remove) --> */}
+          </Td>
+          <Td class="px-6 py-4 whitespace-nowrap">
             <button
               onClick={() => handleCartDelete(cartItem?._id)}
               class="text-red-600 hover:text-red-800"
             >
               Remove
             </button>
-          </td>
-        </tr>
+          </Td>
+        </Tr>
       ))}
-    </tbody>
+    </Tbody>
   );
 };
-
 export default CartTable;
