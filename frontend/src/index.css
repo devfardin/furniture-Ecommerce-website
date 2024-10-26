@@ -40,5 +40,11 @@ body{
    background: #599A8D;
 }
  
-
-
+@media screen and (max-width: 40em) {
+   .responsiveTable tbody tr {
+       border: none !important;
+   }
+}
+.cart-table-td{
+   padding: 1.5rem 1rem !important;
+}

@@ -5,20 +5,21 @@ import Loader from "../../../../components/shared/Loader";
 import CartTable from "./CartTable";
 import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 import "react-super-responsive-table/dist/SuperResponsiveTableStyle.css";
-import { Link } from "react-router-dom";
-import useAxiosSecure from "../../../../hooks/useAxiosSecure";
-import { FiMinus, FiPlus } from "react-icons/fi";
+
 
 const MyCart = () => {
   const [refetch, isLoading, error, cartItems] = useCartData();
 
+console.log( cartItems.length > 0);
+console.log( cartItems.length < 0);
 
+console.log(cartItems.length);
 
   if (isLoading) {
     return <Loader />;
-  } else if (cartItems.length < 0) {
+  } else if ( !cartItems.length > 0) {
     return (
-      <div className="flex justify-center items-center gap-3">
+      <div className="flex justify-center flex-col mt-2 bg-white h-3/4 py-20 items-center gap-3">
         <h1 className="text-4xl font-semibold text-heading">
           No Products in your Cart!
         </h1>
@@ -27,26 +28,26 @@ const MyCart = () => {
     );
   }
   return (
-    <div className="grid grid-cols-1 xl:grid-cols-7 lg:gap-5 justify-between">
+    <div className="grid grid-cols-1 xl:grid-cols-7 gap-6 justify-between">
       {/* Cart Data Table */}
       <div className="col-span-full xl:col-span-5">
         
          <Table class="min-w-full border border-[#F1F1F1]">
           <Thead class="bg-[#F1F1F1]">
             <Tr className="!py-5 !w-full">
-              <Th class="py-4 text-left text-xl font-medium text-gray-500 tracking-wider">
+              <Th class="!py-4 !px-6 text-left text-xl font-medium text-gray-500 tracking-wider">
                 Product
               </Th>
-              <Th class="py-4 text-left text-xl font-medium text-gray-500 tracking-wider">
+              <Th class="!py-4 !px-6 text-left text-xl font-medium text-gray-500 tracking-wider">
                 Price
               </Th>
-              <Th class="py-4 text-left text-xl font-medium text-gray-500 tracking-wider">
+              <Th class="!py-4 !px-6 text-left text-xl font-medium text-gray-500 tracking-wider">
                 Quantity
               </Th>
-              <Th class="py-4 text-left text-xl font-medium text-gray-500 tracking-wider">
+              <Th class="!py-4 !px-6 text-left text-xl font-medium text-gray-500 tracking-wider">
                 Subtotal
               </Th>
-              <Th class="py-4 text-left text-xl font-medium text-gray-500 tracking-wider">
+              <Th class="!py-4 !px-6 text-left text-xl font-medium text-gray-500 tracking-wider">
                 Action
               </Th>
             </Tr>
