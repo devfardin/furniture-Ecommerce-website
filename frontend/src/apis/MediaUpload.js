@@ -1,5 +1,4 @@
 import axios from "axios"
-
 export const mediaUpload = async( image ) =>{
     const formData = new FormData();
     formData.append('image', image)
