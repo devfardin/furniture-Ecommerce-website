@@ -10,13 +10,22 @@ import { TbTruckReturn } from "react-icons/tb";
 import ProductDetailTab from "./ProductDetailTab";
 import { Helmet } from "react-helmet";
 import { useParams } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
-import { axiosPublic } from "../../hooks/useAxiosPublic";
+import { useMutation, useQueries, useQuery } from "@tanstack/react-query";
+import useAxiosPublic, { axiosPublic } from "../../hooks/useAxiosPublic";
 import Loader from "../../components/shared/Loader";
+import toast from "react-hot-toast";
+import useAuth from "../../hooks/useAuth";
+import useCartData from "../../hooks/useCartData";
 const ShopSingle = () => {
+  const axiosPublic = useAxiosPublic();
+  const [refetch] = useCartData();
+  const { user } = useAuth();
   const [productQuantity, setProductQuantity] = useState(1);
   const { id } = useParams();
+  const customerEmail = user?.email;
+  // Stock Management
 
+  // Single Product data Fetch
   const { data, isLoading } = useQuery({
     queryKey: ["product", id],
     queryFn: async () => {
@@ -24,15 +33,62 @@ const ShopSingle = () => {
       return data;
     },
   });
-  const isStack = data?.stock > 0; 
 
-  
-  
+  // Stock Management
+  const isStock = data?.stock > 0;
+
+  if (data?.stock < productQuantity) {
+    toast.error("Select Maxiam number");
+  }
+
+  // post user cart data in bd
+  const { mutateAsync } = useMutation({
+    mutationFn: async (product) => {
+      const { data } = await axiosPublic.put("/cart", {
+        ...product,
+        productQuantity,
+        customerEmail,
+      });
+      return data;
+    },
+    onSuccess: () => {
+      toast.success("Success! The product has been added to your cart");
+      refetch();
+    },
+    onError: (error) => {
+      toast.error(
+        "There was an error adding the product to your cart. Please try again. "
+      );
+      console.log(error);
+    },
+  });
+
+  // Handle Add to cart btn
+  const handleAddCart = async (product) => {
+    if (user) {
+      await mutateAsync(product)
+    } else {
+      toast.error("To add items to your cart, please register or log in.");
+    }
+  };
+
+  // Handle Buy now btn
+  const handleByeNow = (product) =>{
+    if(user){
+      toast('Please wati! We are workig righr now on this function', {
+        icon: '👏',
+      });
+    }
+    else{
+      toast.error("To add items to your cart, please register or log in.");
+    }
+   
+  }
 
   return (
     <div>
       <Helmet>
-        <title>Furnito |  { isLoading ? "Shop Single" : data?.name} </title>
+        <title>Furnito | {isLoading ? "Shop Single" : data?.name} </title>
       </Helmet>
       <PageHeader page={data?.name} />
       {isLoading ? (
@@ -41,14 +97,11 @@ const ShopSingle = () => {
         <Container>
           <div className="grid grid-cols-1 md:grid-cols-8 lg:grid-cols-8 mt-20 gap-12">
             <div className="col-span-4">
-              <img
-                src={data?.featureImg}
-                alt="Product Image"
-              />
+              <img src={data?.featureImg} alt="Product Image" />
             </div>
             <div className="col-span-4">
               <h1 className="text-3xl font-medium text-heading mb-2">
-               {data.name}
+                {data?.name}
               </h1>
               <span className="bg-[#5AB27E] px-2 py-0.5 text-sm font-normal text-white">
                 New Arival
@@ -56,29 +109,21 @@ const ShopSingle = () => {
 
               {/* Product status */}
               <div className="w-32 my-4 flex justify-between items-center">
-                <span className="text-base font-medium text-pera">
-                  Status: 
-                </span>
+                <span className="text-base font-medium text-pera">Status:</span>
                 <span className="text-base font-semibold text-[#198754]">
-                  {
-                    isStack ? "In Stock " : "Stock Out"
-                  }
+                  {isStock ? "In Stock " : "Stock Out"}
                 </span>
               </div>
               {/* Product Price */}
               <div className="w-28 mt-4 flex justify-between items-center">
                 <span className="text-xl font-medium text-pera">$7,500</span>
                 <span className="text-xl font-medium text-[#888888] line-through">
-                  {
-                      data?.discount > 0 && data?.discount
-                  }
+                  {data?.discount > 0 && data?.discount}
                 </span>
               </div>
               {/* Product Short Description */}
               <p className="text-pera text-base font-normal my-5">
-                {
-                  data?.description
-                }
+                {data?.description}
               </p>
               {/* Product quantity manage */}
               <div className="flex items-center  gap-6">
@@ -111,10 +156,14 @@ const ShopSingle = () => {
                 </h1>
               </div>
               <div className="flex flex-col md:flex-row lg:flex-row gap-5 mt-6">
-                <button className="bg-[#333333] py-3.5 px-16 font-medium text-base text-white">
+                <button
+                  onClick={() => handleAddCart(data)}
+                  className="bg-[#333333] py-3.5 px-16 font-medium text-base text-white"
+                >
                   Add to Cart
                 </button>
-                <button className="bg-[#DDDDDD] py-3.5 px-16 font-medium text-base text-heading">
+                <button onClick={ ()=>handleByeNow(data) }
+                 className="bg-[#DDDDDD] py-3.5 px-16 font-medium text-base text-heading">
                   Buy Now
                 </button>
               </div>
@@ -133,20 +182,16 @@ const ShopSingle = () => {
                 <div className="flex items-center gap-3">
                   <span className="text-base font-normal text-pera">SKU: </span>
                   <span className="text-base font-normal text-[#198754]">
-                    {
-                      data?.sku
-                    }
+                    {data?.sku}
                   </span>
                 </div>
 
                 <div className=" flex items-center gap-3">
                   <span className="text-base font-normal text-pera">
-                    Category: 
+                    Category:
                   </span>
                   <span className="text-base font-normal text-[#198754]">
-                    {
-                      data?.category
-                    }
+                    {data?.category}
                   </span>
                 </div>
               </div>

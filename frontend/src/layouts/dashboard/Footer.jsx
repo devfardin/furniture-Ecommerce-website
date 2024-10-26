@@ -4,7 +4,7 @@ const Footer = () => {
   const date = new Date();
   const year = date.getFullYear();
   return (
-    <div className="bg-white transition-all duration-500 rounded-lg mt-5 p-5">
+    <div className="bg-white transition-all duration-500 rounded-lg mt-8 p-5">
       <p className="text-lg text-center">
         © { year } Furnito. Developed by{" "}
         <a

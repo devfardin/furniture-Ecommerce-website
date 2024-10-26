@@ -34,7 +34,7 @@ const Header = ({ isOpen, setIsOpen }) => {
 
   return (
     // Header wrpper Start
-    <div className="bg-white flex-1 transition-all duration-500 rounded-lg mb-5 px-5 py-2">
+    <div className="bg-white flex-1 transition-all duration-500 rounded-lg mb-8 px-5 py-2">
       {/* header innder container star */}
       <div className="flex justify-between items-center gap-5 ">
         {/* Left start */}

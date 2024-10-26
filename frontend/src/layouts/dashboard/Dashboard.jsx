@@ -5,10 +5,14 @@ import { FiMenu } from "react-icons/fi";
 import Header from "./Header";
 import Footer from "./Footer";
 import { Outlet } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
+import Loader from "../../components/shared/Loader";
 
 const Dashboard = () => {
+  const { loading } = useAuth()
   const [isOpen, setIsOpen] = useState(true);
-
+  
+  if( loading ) return <Loader/>
   return (
     <div className=" gap-5 flex bg-[#F5F7FA]">
       {/* Start Sidebar Area */}
@@ -22,7 +26,7 @@ const Dashboard = () => {
       {/* End Side bar Area */}
 
       {/* Start Header Area */}
-      <div className="flex-1 flex flex-col  sm:ml-0 mx-3 ">
+      <div className="flex-1 flex flex-col  sm:ml-0  ml-3 mr-5 ">
         <div>
         <Header isOpen={isOpen} setIsOpen={setIsOpen}/>
         </div>

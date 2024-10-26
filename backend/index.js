@@ -31,12 +31,14 @@ async function run() {
     const database = client.db("furnito");
     const productCollection = database.collection("products");
     const usersCollection = database.collection("users");
+    const cartCollection = database.collection("cart");
 
     // All Get Method
     app.get("/products", async (req, res) => {
       const result = await productCollection.find().toArray();
       res.send(result);
     });
+
     // Get Single product Data
     app.get("/product/:id", async (req, res) => {
       const id = req.params.id;
@@ -47,12 +49,28 @@ async function run() {
       res.send(result);
     });
 
+    // get Cart Single product data
+    app.get("/cart/:id", async (req, res) => {
+      const id = req.params.id;      
+      const result = await cartCollection.findOne(id);
+      res.send(result);
+    });
+    // get cart product base on user email
+    app.get('/product-cart', async(req, res)=>{
+      var query ={}
+      if( req.query?.email ){        
+        query={ customerEmail:req?.email }
+    }
+      const result = await cartCollection.find(query).toArray()
+      res.send(result)
+    })
+
+    // ----------------------------------------------------
     // Post Data Method
 
     // Save user in bd
     app.put("/user", async (req, res) => {
       const user = req.body;
-
       // check if user already exists in bd
       const isExist = await usersCollection.findOne({ email: user?.email });
       if (isExist) return res.send(isExist);
@@ -68,12 +86,37 @@ async function run() {
       res.send(result);
     });
 
-    // Get User data using email address
-    app.get('/user/:email', async(req, res)=>{
+    app.put("/cart", async (req, res) => {
+      const productData = req.body;
+      const productQuan = productData.productQuantity;
+      const isExist = await cartCollection.findOne({ _id: productData?._id });
+      const dbQuantity = isExist?.productQuantity;
+      const filter = { _id: productData?._id }
+      console.log(dbQuantity);
+      const options = { upsert: true };
+
+      if (isExist) {
+        const updateDoc = {
+          $set: {
+            productQuantity: dbQuantity + productQuan
+          },
+        };
+        const result = cartCollection.updateOne( filter, updateDoc, options )
+        return res.send(result)
+      }
+
+      const result = await cartCollection.insertOne(productData);
+      res.send(result);
+    });
+
+    // ----------------------------------------------------------------------
+
+    // Get Single User data base on the email address
+    app.get("/user/:email", async (req, res) => {
       const email = req.params.email;
-      const result = await usersCollection.findOne( { email }  )
-      res.send(result)
-    } )
+      const result = await usersCollection.findOne({ email });
+      res.send(result);
+    });
 
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });

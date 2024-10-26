@@ -11,7 +11,6 @@ import Register from "../pages/authentication/Register.jsx";
 import ForgotPassword from "../pages/authentication/ForgotPassword.jsx";
 import ShopSingle from "../pages/SinglePage/ShopSingle.jsx";
 import CompareProduct from "../pages/compareProduct";
-import WishList from "../pages/wishlist";
 import NotFound from "../pages/notFound/NotFound";
 import Dashboard from "../layouts/dashboard/Dashboard.jsx";
 import Profile from "../dashboard/pages/Profile.jsx";
@@ -34,6 +33,7 @@ import MyCart from "../dashboard/customer/pages/MyCart.jsx";
 import MyWishlist from "../dashboard/customer/pages/MyWishlist.jsx";
 import ReturnRequests from "../dashboard/customer/pages/ReturnRequests.jsx";
 import SupportTickets from "../dashboard/customer/pages/SupportTickets.jsx";
+import CheckOut from "../pages/checkOut/index.jsx";
 
 const router = createBrowserRouter([
   {
@@ -85,8 +85,8 @@ const router = createBrowserRouter([
       element: <CompareProduct/>
     },
     {
-      path: '/wishlist',
-      element: <WishList/>
+      path: '/checkout',
+      element: <CheckOut/>
     },
     {
       path: '*',
