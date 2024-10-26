@@ -51,19 +51,19 @@ async function run() {
 
     // get Cart Single product data
     app.get("/cart/:id", async (req, res) => {
-      const id = req.params.id;      
+      const id = req.params.id;
       const result = await cartCollection.findOne(id);
       res.send(result);
     });
+
     // get cart product base on user email
-    app.get('/product-cart', async(req, res)=>{
-      var query ={}
-      if( req.query?.email ){        
-        query={ customerEmail:req?.email }
-    }
-      const result = await cartCollection.find(query).toArray()
-      res.send(result)
-    })
+    app.get("/carts", async (req, res) => {
+      const email = req?.query?.email;
+      if (!email) return res.send([]);
+      query = { customerEmail: email };
+      const result = await cartCollection.find(query).toArray();
+      res.send(result);
+    });
 
     // ----------------------------------------------------
     // Post Data Method
@@ -91,18 +91,18 @@ async function run() {
       const productQuan = productData.productQuantity;
       const isExist = await cartCollection.findOne({ _id: productData?._id });
       const dbQuantity = isExist?.productQuantity;
-      const filter = { _id: productData?._id }
+      const filter = { _id: productData?._id };
       console.log(dbQuantity);
       const options = { upsert: true };
 
       if (isExist) {
         const updateDoc = {
           $set: {
-            productQuantity: dbQuantity + productQuan
+            productQuantity: dbQuantity + productQuan,
           },
         };
-        const result = cartCollection.updateOne( filter, updateDoc, options )
-        return res.send(result)
+        const result = cartCollection.updateOne(filter, updateDoc, options);
+        return res.send(result);
       }
 
       const result = await cartCollection.insertOne(productData);

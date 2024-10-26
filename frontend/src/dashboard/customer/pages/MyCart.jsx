@@ -21,7 +21,9 @@ const MyCart = () => {
   return (
     <div className="grid grid-cols-1 xl:grid-cols-7 lg:gap-5 justify-between">
       {/* Cart Data Table */}
-      <div className="col-span-full xl:col-span-5"></div>
+      <div className="col-span-full xl:col-span-5">
+        <h1 className="text-3xl font-medium">Products length {cart.length} items</h1>
+      </div>
 
       <div className="col-span-full xl:col-span-2 border border-dashBorder p-10 bg-white">
         <div className="flex flex-col gap-4">
