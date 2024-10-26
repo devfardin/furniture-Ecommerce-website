@@ -66,10 +66,10 @@ async function run() {
     });
 
     // get all user cart data in db
-    app.get('/cartproduct', async(req, res)=>{
-      const result = await cartCollection.find().toArray()
-      res.send(result) 
-    })
+    app.get("/cartproduct", async (req, res) => {
+      const result = await cartCollection.find().toArray();
+      res.send(result);
+    });
 
     // ----------------------------------------------------
     // Post Data Method
@@ -100,38 +100,32 @@ async function run() {
       const productQuan = productData?.productQuantity;
 
       // come data from database
-      const queryId = { productId: productId, customerEmail: customerEmail  }
-      const query2 ={ customerEmail: customerEmail }
-      const isExistId = await cartCollection.findOne(queryId );
-      const isExistEmail = await cartCollection.findOne(query2 );
+      const queryId = { productId: productId, customerEmail: customerEmail };
+      const query2 = { customerEmail: customerEmail };
+      const isExistId = await cartCollection.findOne(queryId);
+      const isExistEmail = await cartCollection.findOne(query2);
       const isExistDbId = isExistId?.productId;
 
       const isExistDbEmail = isExistEmail?.customerEmail;
+      const dbQuantity = isExistId?.productQuantity;
 
-      const dbQuantity =  isExistId?.productQuantity ;
-
-      console.log(dbQuantity);
-        
-
-
-      if ( productId === isExistDbId && customerEmail === isExistDbEmail  ) {
-
+      if (productId === isExistDbId && customerEmail === isExistDbEmail) {
         const filter = {
-           productId: productId,
-           customerEmail: customerEmail 
-           };
+          productId: productId,
+          customerEmail: customerEmail,
+        };
 
-        const options = { upsert:
-          productId === isExistDbId
-          && customerEmail === isExistDbEmail  };
+        const options = {
+          upsert: productId === isExistDbId && customerEmail === isExistDbEmail,
+        };
 
-          const updateDoc = {
-            $set: {
-              productQuantity: dbQuantity + productQuan,
-            },
-          };
-          const result = cartCollection.updateOne(filter, updateDoc, options);
-          return res.send(result);
+        const updateDoc = {
+          $set: {
+            productQuantity: dbQuantity + productQuan,
+          },
+        };
+        const result = cartCollection.updateOne(filter, updateDoc, options);
+        return res.send(result);
       }
       const result = await cartCollection.insertOne(productData);
       res.send(result);
