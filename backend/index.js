@@ -97,41 +97,44 @@ async function run() {
       // come from client or user data
       const productId = productData?.productId;
       const customerEmail = productData?.customerEmail;
-
       const productQuan = productData?.productQuantity;
 
       // come data from database
-      const query = { productId: productId }
+      const queryId = { productId: productId, customerEmail: customerEmail  }
       const query2 ={ customerEmail: customerEmail }
-      const isExist = await cartCollection.findOne( query && query2 );
+      const isExistId = await cartCollection.findOne(queryId );
+      const isExistEmail = await cartCollection.findOne(query2 );
+      const isExistDbId = isExistId?.productId;
 
-      console.log(isExist);
-      
-      
+      const isExistDbEmail = isExistEmail?.customerEmail;
+
+      const dbQuantity =  isExistId?.productQuantity ;
+
+      console.log(dbQuantity);
+        
 
 
-      console.log();
-      
+      if ( productId === isExistDbId && customerEmail === isExistDbEmail  ) {
 
-      
+        const filter = {
+           productId: productId,
+           customerEmail: customerEmail 
+           };
 
-      const dbQuantity =  isExist?.productQuantity;
-      
+        const options = { upsert:
+          productId === isExistDbId
+          && customerEmail === isExistDbEmail  };
 
-      const filter = { "productId": productData?.productId };
-      const options = { upsert: true };
-
-      if (  ''  ) {
           const updateDoc = {
             $set: {
               productQuantity: dbQuantity + productQuan,
             },
           };
-          // const result = cartCollection.updateOne(filter, updateDoc, options);
-          // return res.send(result);
+          const result = cartCollection.updateOne(filter, updateDoc, options);
+          return res.send(result);
       }
-      // const result = await cartCollection.insertOne(productData);
-      // res.send(result);
+      const result = await cartCollection.insertOne(productData);
+      res.send(result);
     });
 
     // ----------------------------------------------------------------------
