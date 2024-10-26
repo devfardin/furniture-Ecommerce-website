@@ -16,9 +16,11 @@ import Loader from "../../components/shared/Loader";
 import toast from "react-hot-toast";
 import useAuth from "../../hooks/useAuth";
 import useCartData from "../../hooks/useCartData";
+import useWishList from "../../hooks/useWishList";
 const ShopSingle = () => {
   const axiosPublic = useAxiosPublic();
   const [refetch] = useCartData();
+  const [wishlistRefetch] = useWishList();
   const { user } = useAuth();
   const [productQuantity, setProductQuantity] = useState(1);
   const { id } = useParams();
@@ -55,15 +57,13 @@ const ShopSingle = () => {
       toast.error(
         "There was an error adding the product to your cart. Please try again. "
       );
-      console.log(error);
     },
   });
 
-  // Handle Add to cart btn
+  // Handle Add to cart button action
   const handleAddCart = async (product) => {
-
-    const productId= product?._id;
-    const name= product?.name;
+    const productId = product?._id;
+    const name = product?.name;
     const category = product?.category;
     const discount = product?.discount;
     const price = product?.price;
@@ -81,27 +81,69 @@ const ShopSingle = () => {
       sellerEmail,
       productQuantity,
       customerEmail,
-    }
-
+    };
     if (user) {
-      await mutateAsync(productInfo)
+      await mutateAsync(productInfo);
     } else {
       toast.error("To add items to your cart, please register or log in.");
     }
   };
 
-  // Handle Buy now btn
-  const handleByeNow = (product) =>{
-    if(user){
-      toast('Please wati! We are workig righr now on this function', {
-        icon: '👏',
-      });
+  const { wishListMetateAsync }= useMutation({
+    mutationKey: ['wishlist', customerEmail],
+    mutationFn: async(wishList)=>{
+      const { data } = await axiosPublic.put('/wishlist', wishList)
+      return data
+    },
+    onSuccess: ()=>{
+      toast.success('Success! The product has been added to your wishlist.');
+      wishlistRefetch()
+    },
+    onError: (error) =>{
+      toast.error('This product is already in your wishlist.')
     }
-    else{
+  })
+  // Handle wishlist button action
+  const handleWishList = async(product) => {
+    const productId = product?._id;
+    const name = product?.name;
+    const category = product?.category;
+    const discount = product?.discount;
+    const price = product?.price;
+    const featureImg = product?.featureImg;
+    const description = product?.description;
+    const sellerEmail = product?.authorEmail;
+    const wishListProduct = {
+      productId,
+      name,
+      category,
+      discount,
+      price,
+      featureImg,
+      description,
+      sellerEmail,
+      productQuantity,
+      customerEmail,
+    };
+    if (user) {
+      await wishListMetateAsync(wishListProduct);
+    } else {
       toast.error("To add items to your cart, please register or log in.");
     }
-   
-  }
+
+    
+  };
+
+  // Handle Buy now btn
+  const handleByeNow = (product) => {
+    if (user) {
+      toast("Please wati! We are workig righr now on this function", {
+        icon: "👏",
+      });
+    } else {
+      toast.error("To add items to your cart, please register or log in.");
+    }
+  };
 
   return (
     <div>
@@ -119,8 +161,8 @@ const ShopSingle = () => {
             </div>
             <div className="col-span-4">
               <h1 className="text-3xl font-medium text-heading mb-2">
-                {data?.name} 
-                <br/>
+                {data?.name}
+                <br />
                 {data?._id}
                 <br />
                 {user?.email}
@@ -184,14 +226,16 @@ const ShopSingle = () => {
                 >
                   Add to Cart
                 </button>
-                <button onClick={ ()=>handleByeNow(data) }
-                 className="bg-[#DDDDDD] py-3.5 px-16 font-medium text-base text-heading">
+                <button
+                  onClick={() => handleByeNow(data)}
+                  className="bg-[#DDDDDD] py-3.5 px-16 font-medium text-base text-heading"
+                >
                   Buy Now
                 </button>
               </div>
               {/* Product Feature  */}
               <ul className="flex  items-center gap-x-2 px-2 mt-7">
-                <li className="p-2 group-scoped  rounded-md group bg-primary transition-all duration-300">
+                <li onClick={()=>handleWishList(data)} className="p-2 group-scoped  rounded-md group bg-primary transition-all duration-300">
                   <IoHeartOutline className="text-xl text-white transition-all duration-300 cursor-pointer" />
                 </li>
                 <li className="p-2 group-scoped  rounded-md group bg-primary transition-all duration-300 cursor-pointer">
