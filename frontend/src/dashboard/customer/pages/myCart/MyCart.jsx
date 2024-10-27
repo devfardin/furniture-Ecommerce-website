@@ -10,11 +10,6 @@ import "react-super-responsive-table/dist/SuperResponsiveTableStyle.css";
 const MyCart = () => {
   const [refetch, isLoading, error, cartItems] = useCartData();
 
-console.log( cartItems.length > 0);
-console.log( cartItems.length < 0);
-
-console.log(cartItems.length);
-
   if (isLoading) {
     return <Loader />;
   } else if ( !cartItems.length > 0) {
@@ -31,7 +26,6 @@ console.log(cartItems.length);
     <div className="grid grid-cols-1 xl:grid-cols-7 gap-6 justify-between">
       {/* Cart Data Table */}
       <div className="col-span-full xl:col-span-5">
-        
          <Table class="min-w-full border border-[#F1F1F1]">
           <Thead class="bg-[#F1F1F1]">
             <Tr className="!py-5 !w-full">

@@ -163,10 +163,10 @@ const ShopSingle = () => {
             <div className="col-span-4">
               <h1 className="text-3xl font-medium text-heading mb-2">
                 {data?.name}
-                <br />
+                {/* <br />
                 {data?._id}
                 <br />
-                {user?.email}
+                {user?.email} */}
               </h1>
               <span className="bg-[#5AB27E] px-2 py-0.5 text-sm font-normal text-white">
                 New Arival
