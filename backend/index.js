@@ -148,10 +148,22 @@ async function run() {
           },
         };
         const result = cartCollection.updateOne(filter, updateDoc, options);
-        return res.send(result);
+        if(result){
+          return res.status(200).json({
+            success: true,
+            message: "This item is already in your cart. Quantity has been updated.",
+          });
+        }
       }
       const result = await cartCollection.insertOne(productData);
-      res.send(result);
+      if(result){
+        return res.status(200).json({
+          success: true,
+          message: "Item added to your cart successfully.",
+        });
+      }
+      
+      // res.send(result);
     });
 
     // Wish list Product post method

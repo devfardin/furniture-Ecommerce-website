@@ -49,8 +49,10 @@ const ShopSingle = () => {
       const { data } = await axiosPublic.put("/cart", product);
       return data;
     },
-    onSuccess: () => {
-      toast.success("Success! The product has been added to your cart");
+    onSuccess: (success) => {
+      toast.success(success?.message);
+      console.log(success);
+      
       refetch();
     },
     onError: (error) => {
