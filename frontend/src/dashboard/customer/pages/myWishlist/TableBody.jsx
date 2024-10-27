@@ -73,7 +73,7 @@ const TableBody = ({ wishlistRefetch, isLoading, wishList }) => {
           </Td>
           <Td class="px-6 py-4 whitespace-nowrap ">
             <h1 className="text-base leading-5 lg:text-xl font-medium text-heading mt-2 md:mt-0">{`$${
-              cartItem?.price * cartItem?.productQuantity
+              (cartItem?.price * cartItem?.productQuantity).toFixed(2)
             }`}</h1>
           </Td>
           <Td class="px-6 py-4 whitespace-nowrap text-center ">

@@ -77,13 +77,11 @@ const CartTable = ({ refetch, cartItems }) => {
             </div>
           </Td>
           <Td class="px-6 py-4 whitespace-nowrap ">
-            <h1 className="text-base leading-5 lg:text-xl font-medium text-heading mt-2 md:mt-0">{`$${
-              cartItem?.price * cartItem?.productQuantity
-            }`}</h1>
+            <h1 className="text-base leading-5 lg:text-xl font-medium text-heading mt-2 md:mt-0">{`$${(cartItem?.price * cartItem?.productQuantity).toFixed(2)}`}</h1>
           </Td>
           <Td class="px-6 py-4 whitespace-nowrap text-center ">
             <button
-              onClick={() => handleCartDelete(cartItem?._id)}
+              onClick={() =>handleCartDelete(cartItem?._id)}
               class="text-right bg-primary md:bg-transparent p-2 text-white rounded text-2xl md:text-pera hover:text-primary duration-300 transition-all mt-2 md:mt-0"
             >
               <RiDeleteBin6Line/>
