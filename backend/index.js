@@ -68,8 +68,23 @@ async function run() {
       res.send(result);
     });
 
+    // get wishlist product base on user email
+    app.get("/wishlist", async (req, res) => {
+      const email = req?.query?.email;
+      if (!email) return res.send([]);
+      query = { customerEmail: email };
+      const result = await wishListCollection.find(query).toArray();
+      res.send(result);
+    });
+
     // get all user cart data in db
     app.get("/cartproduct", async (req, res) => {
+      const result = await cartCollection.find().toArray();
+      res.send(result);
+    });
+
+    // get all user Wishlist data in db
+    app.get("/wishlist", async (req, res) => {
       const result = await cartCollection.find().toArray();
       res.send(result);
     });
