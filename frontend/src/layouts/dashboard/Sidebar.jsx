@@ -27,8 +27,8 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
   };
 
   return (
-    <div className=" bg-white overflow-hidden relative">
-      <div className="flex flex-col  gap-5 overflow-y-auto h-screen">
+    <div className={`${isOpen ? 'fixed top-0' : 'fixed shadow-md border-r top-0'} bg-white overflow- top-0`}>
+      <div className="flex flex-col overflow-y-scroll  gap-5  h-screen">
         {/* Side bar Logo and title start */}
         <div
           className={`${

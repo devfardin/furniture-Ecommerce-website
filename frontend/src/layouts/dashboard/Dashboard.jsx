@@ -19,7 +19,7 @@ const Dashboard = () => {
      <div>
      <div
         className={`${
-          isOpen ? "w-0 sm:w-[300px]" : "w-[300px] md:w-20"
+          isOpen ? "w-0 md:w-[300px]" : "w-[300px] md:w-20"
         } absolute md:relative top-0 overflow-hidden transition-all duration-500 shadow-lg  border-neutral-300 z-10 bg-white`}
       >
         <Sidebar isOpen={isOpen} setIsOpen={setIsOpen}></Sidebar>

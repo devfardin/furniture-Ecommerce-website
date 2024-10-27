@@ -35,9 +35,17 @@ async function run() {
     const wishListCollection = database.collection("wishlist");
 
     // All Get Method here 👈
-    // -------------------------
+    // =====================================================
 
+    // get all product for user
+    // ------------------------
     app.get("/products", async (req, res) => {
+      const result = await productCollection.find().toArray();
+      res.send(result);
+    });
+
+    // get all product for admin
+    app.get("/all-products", async (req, res) => {
       const result = await productCollection.find().toArray();
       res.send(result);
     });
