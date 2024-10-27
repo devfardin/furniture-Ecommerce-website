@@ -32,7 +32,7 @@ async function run() {
     const productCollection = database.collection("products");
     const usersCollection = database.collection("users");
     const cartCollection = database.collection("cart");
-    const wishListCollection = database.collection('wishlist')
+    const wishListCollection = database.collection("wishlist");
 
     // All Get Method here 👈
     // -------------------------
@@ -89,8 +89,8 @@ async function run() {
       res.send(result);
     });
 
-     // Get Single User data base on the email address
-     app.get("/user/:email", async (req, res) => {
+    // Get Single User data base on the email address
+    app.get("/user/:email", async (req, res) => {
       const email = req.params.email;
       const result = await usersCollection.findOne({ email });
       res.send(result);
@@ -148,65 +148,64 @@ async function run() {
           },
         };
         const result = cartCollection.updateOne(filter, updateDoc, options);
-        if(result){
+        if (result) {
           return res.status(200).json({
             success: true,
-            message: "This item is already in your cart. Quantity has been updated.",
+            message:
+              "This item is already in your cart. Quantity has been updated.",
           });
         }
       }
       const result = await cartCollection.insertOne(productData);
-      if(result){
+      if (result) {
         return res.status(200).json({
           success: true,
           message: "Item added to your cart successfully.",
         });
       }
-      
+
       // res.send(result);
     });
 
     // Wish list Product post method
     // -------------------------------
-    app.put('/wishlist', async(req, res)=>{
+    app.put("/wishlist", async (req, res) => {
       const wishListProduct = req.body;
-      const productId =wishListProduct?.productId;
-      const customerEmail= wishListProduct?.customerEmail;
-      
+      const productId = wishListProduct?.productId;
+      const customerEmail = wishListProduct?.customerEmail;
+
       const query = { productId: productId, customerEmail: customerEmail };
-      const isExist = await wishListCollection.findOne(query)
-      
-      if(isExist){
+      const isExist = await wishListCollection.findOne(query);
+
+      if (isExist) {
         return res.status(400).json({
           success: false,
           message: "The item already exists in your records.",
         });
       }
       const result = await wishListCollection.insertOne(wishListProduct);
-      return res.send(result)
-      
-    })
+      return res.send(result);
+    });
 
     // =============================================================================
 
-  
     // All Delete Methor Here 👈
     // -------------------------
 
     // get delte from database
-    app.delete('/cart/:id', async(req, res)=>{
-      const id= req.params.id;
-      const query = { _id:new ObjectId(id) }
+    app.delete("/cart/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
       const result = await cartCollection.deleteOne(query);
-      res.send(result)
-    })
+      res.send(result);
+    });
     // get delte from database
-    app.delete('/wishlist/:id', async(req, res)=>{
-      const id= req.params.id;
-      const query = { _id:new ObjectId(id) }
+    app.delete("/wishlist/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
       const result = await wishListCollection.deleteOne(query);
-      res.send(result)
-    })
+      res.send(result);
+    });
 
     // ===================================================================================
 

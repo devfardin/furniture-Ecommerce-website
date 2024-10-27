@@ -14,7 +14,7 @@ const Dashboard = () => {
   
   if( loading ) return <Loader/>
   return (
-    <div className=" gap-5 flex bg-[#F5F7FA]">
+    <div className=" gap-5 flex bg-[#F5F7FA] overflow-hidden">
       {/* Start Sidebar Area */}
      <div>
      <div
@@ -32,9 +32,10 @@ const Dashboard = () => {
         <div>
         <Header isOpen={isOpen} setIsOpen={setIsOpen}/>
         </div>
-        
-        <Outlet/>
 
+        <div>
+        <Outlet/>
+        </div>
         <div className="mt-auto">
         <Footer/>
         </div>
