@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
+import TextEditor from "../../../components/TextEditor";
 
 const AddProduct = () => {
+  const [textValue, setTextValue] = useState("")
   return (
     <form className="grid grid-cols-8">
       <div className="col-span-5 rounded-md bg-white shadow-md p-5">
@@ -31,14 +33,14 @@ const AddProduct = () => {
               className="text-lg font-semibold text-pera"
               htmlFor="Product-description"
             >
-              Product Description
+              Product Short Description
             </label>
             <textarea
-            rows='4'
+            rows='3'
               type="text"
               name="productDescription"
               id="Product-description"
-              placeholder="Enter Product Description"
+              placeholder="Enter Short Product Description"
               className="py-3 px-4 border border-[#B1B5C3] hover:border-dashPrimary focus:border-dashPrimary outline-none w-full rounded-md text-lg font-normal"
             />
           </div>
@@ -114,6 +116,8 @@ const AddProduct = () => {
             />
           </div>
           </div>
+          {/* Product description text editor */}
+          <TextEditor textValue={textValue} setTextValue={setTextValue}/>
 
 
         </div>
