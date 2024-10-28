@@ -11,9 +11,10 @@ const TextEditor = ({ textValue, setTextValue }) => {
       [{ header: [1, 2, 3, false] }],
       ["bold", "italic", "underline", "strike", "blockquote"],
       [{ list: "ordered" }, { list: "bullet" }],
-      ["link"],
+      ["link","formula"],
       [{ "code-block": true }],
       [{ color: [] }],
+      [{ 'align': [] }],
       ["clean"],
     ],
   };
@@ -28,6 +29,8 @@ const TextEditor = ({ textValue, setTextValue }) => {
     "bullet",
     "link",
     "color",
+    "align",
+    "formula",
     "code-block",
   ];
 
