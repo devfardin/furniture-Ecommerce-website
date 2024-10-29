@@ -48,3 +48,7 @@ body{
 .cart-table-td{
    padding: 1.5rem 1rem !important;
 }
+/* Rich Text Area */
+.ql-container.ql-snow {
+   height: 150px !important;
+}
